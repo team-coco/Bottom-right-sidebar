@@ -4,6 +4,8 @@
   "description": "Bottom right sidebar (People also viewed, Lists including..., You might also consider, Nearby...)",
   "main": "index.js",
   "scripts": {
+    "server": "nodemon ./server/index.js",
+    "react-dev": "webpack -d --watch ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +19,8 @@
   },
   "homepage": "https://github.com/codenamesgroup/Bottom-right-sidebar#readme",
   "dependencies": {
+    "axios": "^0.18.0",
+    "nodemon": "^1.15.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
