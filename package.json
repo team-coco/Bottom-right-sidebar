@@ -1,0 +1,31 @@
+{
+  "name": "bottom-right-sidebar",
+  "version": "1.0.0",
+  "description": "Bottom right sidebar (People also viewed, Lists including..., You might also consider, Nearby...)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codenamesgroup/Bottom-right-sidebar.git"
+  },
+  "author": "carlton",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codenamesgroup/Bottom-right-sidebar/issues"
+  },
+  "homepage": "https://github.com/codenamesgroup/Bottom-right-sidebar#readme",
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "express": "^4.16.2",
+    "webpack": "^3.11.0"
+  }
+}
