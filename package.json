@@ -1,7 +1,8 @@
 {
   "name": "bottom-right-sidebar",
   "version": "1.0.0",
-  "description": "Bottom right sidebar (People also viewed, Lists including..., You might also consider, Nearby...)",
+  "description":
+    "Bottom right sidebar (People also viewed, Lists including..., You might also consider, Nearby...)",
   "main": "index.js",
   "scripts": {
     "server": "nodemon ./server/index.js",
