@@ -1,0 +1,34 @@
+People Also Viewed
+3 sections with 4 parts
+* All below must correspond with cuisine and proximity of selected biz
+1- image, biz title, review stars, total reviews, tip
+2- image, biz title, review stars, total reviews, tip
+3- image, biz title, review stars, total reviews, tip
+
+Other Places Nearby
+3 sections all links with dynamic information
+1 - "Find more " +   id cuisine        + "Near" +   id biz name
+2 - "Find more " +   id menu item      + "'s"
+3 - "Find more " +   id menu item near +   id biz name
+
+Browse Nearby
+3 sections with an image and default suggestion
+1 - image, Restaurants
+2 - image, Nightlife
+3 - image, Shopping
+4 - image, Show all
+
+Dining in + id city
+2 sections with image and link
+1 - image, Search for Reservations
+2 - image, Book a Table in + id city
+
+Best of + id city
+mThings to do in + id city
+
+People Found + id biz title + by searching for...
+Best + id menu item + id city
+
+Near Me
+id menu item#1 + Near Me
+id menu item#2 + Near Me
