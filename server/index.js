@@ -22,7 +22,7 @@ connection.connect(function(err) {
 
 app.get("/repos", function(req, res) {
   // connection.connect();
-  var q = 'SELECT * FROM business WHERE city="Toronto" LIMIT 1';
+  var q = 'SELECT * FROM business WHERE city="Las Vegas" LIMIT 1';
   // We will agree on roughly ~10 business ID's to test
   // id business city needs to be dynamic based on the business ID
   // query needs to reflect location and cuisine

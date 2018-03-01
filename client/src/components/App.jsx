@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import axios from "axios";
 
 class App extends React.Component {
@@ -26,6 +27,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="page">
+        <FontAwesomeIcon icon="calendar-check" />
         <h1 className="rightsb_header">Things to Consider</h1>
         <h2 className="rightsb_subheader">People Also Viewed</h2>
         <p className="rightsb_listitem">img Place 1</p>
@@ -55,7 +57,7 @@ class App extends React.Component {
           <img src={"./icons/icon_shopping.jpeg"} />Shopping
         </p>
         <p className="rightsb_listitem">
-          <img src={"./icons/icon_ellipsis.png"} />Show All
+          <img src={"../icons/icon_ellipsis.png"} />Show All
         </p>
         <h2 className="rightsb_subheader">
           Dining in {this.state.business[0].city}
