@@ -22,10 +22,7 @@ class App extends React.Component {
         this.setState({ matchingBiz1: response.data[0] });
         this.setState({ matchingBiz2: response.data[1] });
         this.setState({ matchingBiz3: response.data[2] });
-        console.log(this.state.matchingBiz1.name, "NAME OF THE 1st BIZ");
-        console.log(this.state.matchingBiz2.name, "NAME OF THE 2nd BIZ");
-        console.log(this.state.matchingBiz3.name, "NAME OF THE 3rd BIZ");
-        console.log(response, "these should be 3 business ids");
+        console.log(response, "these should be 3 matching zip businesses");
       })
       .catch(err => {
         console.log(err);
@@ -60,8 +57,20 @@ class App extends React.Component {
         <h1 className="rightsb_header">Things to Consider</h1>
         <h2 className="rightsb_subheader">People Also Viewed</h2>
         <p className="rightsb_listitem">img {this.state.matchingBiz1.name}</p>
+        <p className="rightsb_review_count">
+          {" "}
+          {this.state.matchingBiz1.review_count} reviews{" "}
+        </p>
         <p className="rightsb_listitem">img {this.state.matchingBiz2.name}</p>
+        <p className="rightsb_review_count">
+          {" "}
+          {this.state.matchingBiz2.review_count} reviews{" "}
+        </p>
         <p className="rightsb_listitem">img {this.state.matchingBiz3.name}</p>
+        <p className="rightsb_review_count">
+          {" "}
+          {this.state.matchingBiz3.review_count} reviews{" "}
+        </p>
         <h2 className="rightsb_subheader">Other Places Nearby</h2>
         <p className="rightsb_listitem">
           Find more Places Near {this.state.business[0].name}
