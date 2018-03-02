@@ -59,16 +59,19 @@ class App extends React.Component {
         <p className="rightsb_listitem">img {this.state.matchingBiz1.name}</p>
         <p className="rightsb_review_count">
           {" "}
+          {this.state.matchingBiz1.stars} stars
           {this.state.matchingBiz1.review_count} reviews{" "}
         </p>
         <p className="rightsb_listitem">img {this.state.matchingBiz2.name}</p>
+
         <p className="rightsb_review_count">
-          {" "}
+          {this.state.matchingBiz2.stars} stars
           {this.state.matchingBiz2.review_count} reviews{" "}
         </p>
         <p className="rightsb_listitem">img {this.state.matchingBiz3.name}</p>
         <p className="rightsb_review_count">
           {" "}
+          {this.state.matchingBiz3.stars} stars
           {this.state.matchingBiz3.review_count} reviews{" "}
         </p>
         <h2 className="rightsb_subheader">Other Places Nearby</h2>
@@ -84,29 +87,39 @@ class App extends React.Component {
         <h2 className="rightsb_subheader">Browse Nearby</h2>
         <p className="rightsb_listitem">
           {" "}
-          <img src={"./icons/icon_restaurant.png"} />Restaurants
+          <span>
+            <img className="image" src={"https://i.imgur.com/YVTtcKY.png"} />
+          </span>Restaurants
         </p>
         <p className="rightsb_listitem">
           {" "}
-          <img src={"/icons/icon_nightlife.png"} />Nightlife
+          <span>
+            <img className="image" src={"https://i.imgur.com/f3RdwOP.png"} />
+          </span>Nightlife
         </p>
         <p className="rightsb_listitem">
           {" "}
-          <img src={"./icons/icon_shopping.jpeg"} />Shopping
+          <span>
+            <img className="image" src={"https://i.imgur.com/2sYyjqj.jpg"} />
+          </span>Shopping
         </p>
         <p className="rightsb_listitem">
-          <img src={"../icons/icon_ellipsis.png"} />Show All
+          <span>
+            <img className="image" src={"https://i.imgur.com/aAnrFk2.png"} />
+          </span>Show All
         </p>
         <h2 className="rightsb_subheader">
           Dining in {this.state.business[0].city}
         </h2>
-        <p className="icon">
-          <img src={"/icons/icon_calendar.png"} />
-        </p>
-        <p className="rightsb_listitem">Search for Reservations</p>
         <p className="rightsb_listitem">
-          <img src={"./icons/icon_magglass.jpeg"} />
-          Book a table in {this.state.business[0].city}
+          <span>
+            <img className="image" src={"https://i.imgur.com/rAokCAc.jpg"} />
+          </span>Search for Reservations
+        </p>
+        <p className="rightsb_listitem">
+          <span>
+            <img className="image" src={"https://i.imgur.com/gc2EsDX.png"} />
+          </span>Book a table in {this.state.business[0].city}
         </p>
         <h2 className="rightsb_subheader">
           Best of {this.state.business[0].city}
