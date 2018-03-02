@@ -22,10 +22,20 @@ connection.connect(function(err) {
 
 app.get("/repos", function(req, res) {
   // connection.connect();
-  var q = 'SELECT * FROM business WHERE city="Las Vegas" LIMIT 1';
+  let q = 'SELECT * FROM business WHERE city="Phoenix" LIMIT 1';
   // We will agree on roughly ~10 business ID's to test
   // id business city needs to be dynamic based on the business ID
   // query needs to reflect location and cuisine
+  connection.query(q, function(err, rows, fields) {
+    if (err) throw err;
+    console.log(rows, "hi im rows");
+    // console.log shows up in node
+    res.send(rows);
+  });
+});
+
+app.get("/postalCode", function(req, res) {
+  let q = 'SELECT * FROM business WHERE postal_code="89109" LIMIT 3';
   connection.query(q, function(err, rows, fields) {
     if (err) throw err;
     console.log(rows, "hi im rows");
