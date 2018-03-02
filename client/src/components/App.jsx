@@ -17,7 +17,7 @@ class App extends React.Component {
 
   fetchBusinessIds(postalCode) {
     axios
-      .get("/postalCode", postalCode)
+      .get("http://localhost:3002/yelp/postalCode", postalCode)
       .then(response => {
         this.setState({ matchingBiz1: response.data[0] });
         this.setState({ matchingBiz2: response.data[1] });
@@ -30,11 +30,27 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    // figure out routing on server side to utilize URL
+    // var url = window.location.href.split("/").pop();
+    // url = url.split("?");
+    // if (url.length > 1) {
+    //   var urlParams = url[1].split("&");
+    //   urlParams = urlParams.reduce(
+    //     (acc, param) => {
+    //       param = param.split("=");
+    //       acc[param[0]] = param[1];
+    //       return acc;
+    //     },
+    //     { id: url[0] }
+    //   );
+    // }
+    // console.log(url[0]);
+
     axios
-      .get("/repos")
+      .get("http://localhost:3002/yelp/repos") // { id: url[0] }
       .then(response => {
         this.setState({ business: response.data });
-        console.log(this.state.business[0].city);
+        console.log(this.state.business[0]);
         // we are getting city in the console so accessing is correct
         console.log(response, "THIS IS RESPONSE AND SHOULD BE ON WEBPAGE");
       })
@@ -53,7 +69,6 @@ class App extends React.Component {
   render() {
     return (
       <div className="page">
-        <FontAwesomeIcon icon="calendar-check" />
         <h1 className="rightsb_header">Things to Consider</h1>
         <h2 className="rightsb_subheader">People Also Viewed</h2>
         <p className="rightsb_listitem">img {this.state.matchingBiz1.name}</p>
