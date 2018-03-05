@@ -20,13 +20,32 @@ connection.connect(function(err) {
   }
 });
 
-// current way that works
 app.get("/yelp/repos", function(req, res) {
-  // connection.connect();
   let q = 'SELECT * FROM business WHERE city="Las Vegas" LIMIT 1';
   connection.query(q, function(err, rows, fields) {
     if (err) throw err;
-    console.log(rows, "hi im rows");
+    console.log(rows, "hi im rows business repo");
+    res.send(201, rows);
+  });
+});
+
+app.get("/yelp/postalCode", function(req, res) {
+  let q =
+    'SELECT * FROM business WHERE postal_code="89123" AND review_count > 100 LIMIT 3';
+  connection.query(q, function(err, rows, fields) {
+    if (err) throw err;
+    console.log(rows, "hi im rows postalCode");
+    // console.log shows up in node
+    res.send(201, rows);
+  });
+});
+
+app.get("/yelp/businessTips", function(req, res) {
+  let q = "SELECT * FROM tip LIMIT 1";
+  connection.query(q, function(err, rows, fields) {
+    if (err) throw err;
+    console.log(rows, "hi im rows businessTips");
+    // console.log shows up in node
     res.send(rows);
   });
 });
@@ -43,20 +62,9 @@ app.get("/yelp/repos", function(req, res) {
 //   });
 // });
 
-app.get("/:id", (req, res) => {
-  res.sendFile(path.join(__dirname + "/../dist/index.html"));
-});
-
-app.get("/yelp/postalCode", function(req, res) {
-  let q =
-    'SELECT * FROM business WHERE postal_code="89123" AND review_count > 100 LIMIT 3';
-  connection.query(q, function(err, rows, fields) {
-    if (err) throw err;
-    console.log(rows, "hi im rows");
-    // console.log shows up in node
-    res.send(rows);
-  });
-});
+// app.get("/:id", (req, res) => {
+//   res.sendFile(path.join(__dirname + "/../dist/index.html"));
+// });
 
 app.listen(3002, function() {
   console.log("Listening on 3002!");

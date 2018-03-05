@@ -10,23 +10,12 @@ class App extends React.Component {
       business: [{}],
       postalCode: Number,
       matchingBiz1: [{}],
+      tip1: [{}],
       matchingBiz2: [{}],
-      matchingBiz3: [{}]
+      tip2: [{}],
+      matchingBiz3: [{}],
+      tip3: [{}]
     };
-  }
-
-  fetchBusinessIds(postalCode) {
-    axios
-      .get("http://localhost:3002/yelp/postalCode", postalCode)
-      .then(response => {
-        this.setState({ matchingBiz1: response.data[0] });
-        this.setState({ matchingBiz2: response.data[1] });
-        this.setState({ matchingBiz3: response.data[2] });
-        console.log(response, "these should be 3 matching zip businesses");
-      })
-      .catch(err => {
-        console.log(err);
-      });
   }
 
   componentDidMount() {
@@ -50,9 +39,7 @@ class App extends React.Component {
       .get("http://localhost:3002/yelp/repos") // { id: url[0] }
       .then(response => {
         this.setState({ business: response.data });
-        console.log(this.state.business[0]);
-        // we are getting city in the console so accessing is correct
-        console.log(response, "THIS IS RESPONSE AND SHOULD BE ON WEBPAGE");
+        console.log(response.data, "THIS IS RESPONSE AND SHOULD BE ON WEBPAGE");
       })
       .then(() => {
         var postalCode = this.state.business[0].postal_code;
@@ -66,6 +53,34 @@ class App extends React.Component {
       });
   }
 
+  fetchBusinessIds(postalCode) {
+    axios
+      .get("http://localhost:3002/yelp/postalCode", postalCode)
+      .then(response => {
+        this.setState({ matchingBiz1: response.data[0] });
+        this.setState({ matchingBiz2: response.data[1] });
+        this.setState({ matchingBiz3: response.data[2] });
+        console.log(response, "these should be 3 matching zip businesses");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  fetchTips() {
+    axios
+      .get("http://localhost:3002/yelp/businessTips")
+      .then(response => {
+        console.log(response, "this is response from fetchTips axios react");
+        this.setState({ tip1: response.data[0] });
+        this.setState({ tip2: response.data[1] });
+        this.setState({ tip3: response.data[2] });
+      })
+      .catch(error => {
+        console.log(error, "this is error from fetchTips axios react");
+      });
+  }
+
   render() {
     return (
       <div className="page">
@@ -74,13 +89,13 @@ class App extends React.Component {
         <p className="rightsb_listitem">img {this.state.matchingBiz1.name}</p>
         <p className="rightsb_review_count">
           {" "}
-          {this.state.matchingBiz1.stars} stars
+          {this.state.matchingBiz1.stars} stars{" "}
           {this.state.matchingBiz1.review_count} reviews{" "}
         </p>
         <p className="rightsb_listitem">img {this.state.matchingBiz2.name}</p>
 
         <p className="rightsb_review_count">
-          {this.state.matchingBiz2.stars} stars
+          {this.state.matchingBiz2.stars} stars {"    "}
           {this.state.matchingBiz2.review_count} reviews{" "}
         </p>
         <p className="rightsb_listitem">img {this.state.matchingBiz3.name}</p>

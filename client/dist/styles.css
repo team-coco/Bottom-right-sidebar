@@ -1,18 +1,18 @@
-/* .page {
+.page {
   position: absolute;
   top: 100%;
   right: 0%;
-} */
+}
 
 .rightsb_header {
   font-size: 12px;
-  color: #58b65f;
+  color: #16c600;
   font-family: Verdana;
 }
 
 .rightsb_subheader {
   font-size: 10px;
-  color: #58b65f;
+  color: #16c600;
   font-family: Verdana;
 }
 
