@@ -3,7 +3,6 @@ const app = express();
 const mysql = require("mysql");
 const path = require("path");
 
-// app.use(bodyParser.json());
 app.use(express.static("../client/dist"));
 
 var connection = mysql.createConnection({
@@ -49,18 +48,6 @@ app.get("/yelp/businessTips/:id", function(req, res) {
     res.status(201).send(rows);
   });
 });
-
-// needs fixin
-// app.get("/yelp/repos", (req, res) => {
-//   var id = req.body;
-//   console.log(id, "THIS IS ID on the SERVER SIDE");
-//   var reviews;
-//   var query = `SELECT text, user_id, stars FROM review WHERE business_id = "${id}"`;
-//   connection.query(query, function(err, rows, fields) {
-//     if (err) throw err;
-//     res.send(rows);
-//   });
-// });
 
 app.get("/:id", (req, res) => {
   res.sendFile(path.join(__dirname + "/../client/dist/index.html"));
