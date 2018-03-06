@@ -84,20 +84,23 @@ class App extends React.Component {
         <p className="rightsb_review_count">
           {" "}
           {this.state.matchingBiz1.stars} stars{" "}
-          {this.state.matchingBiz1.review_count} reviews{" "}
+          {this.state.matchingBiz1.review_count} reviews
         </p>
+        <p className="rightsb_review_count">{this.state.tip1.text}</p>
         <p className="rightsb_listitem">img {this.state.matchingBiz2.name}</p>
 
         <p className="rightsb_review_count">
           {this.state.matchingBiz2.stars} stars {"    "}
-          {this.state.matchingBiz2.review_count} reviews{" "}
+          {this.state.matchingBiz2.review_count} reviews
         </p>
+        <p className="rightsb_review_count">{this.state.tip2.text}</p>
         <p className="rightsb_listitem">img {this.state.matchingBiz3.name}</p>
         <p className="rightsb_review_count">
           {" "}
           {this.state.matchingBiz3.stars} stars
-          {this.state.matchingBiz3.review_count} reviews{" "}
+          {this.state.matchingBiz3.review_count} reviews
         </p>
+        <p className="rightsb_review_count">{this.state.tip3.text}</p>
         <h2 className="rightsb_subheader">Other Places Nearby</h2>
         <p className="rightsb_listitem">
           Find more Places Near {this.state.business[0].name}
