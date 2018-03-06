@@ -30,9 +30,12 @@ class App extends React.Component {
       })
       .then(() => {
         var postalCode = this.state.business[0].postal_code;
+        var bizId = this.state.business[0].id;
         console.log(this.state.business[0].postal_code, "this is here");
+        console.log(this.state.business[0].id, "this is the id");
         this.setState({ postalCode: postalCode });
         this.fetchBusinessIds(postalCode);
+        this.fetchTips(bizId);
         console.log(this.state.postalCode, "this is the second promise");
         // send query to db with new biz ID
       })
@@ -58,9 +61,9 @@ class App extends React.Component {
       });
   }
 
-  fetchTips() {
+  fetchTips(bizId) {
     axios
-      .get("http://localhost:3002/yelp/businessTips")
+      .get("http://localhost:3002/yelp/businessTips/" + bizId)
       .then(response => {
         console.log(response, "this is response from fetchTips axios react");
         this.setState({ tip1: response.data[0] });

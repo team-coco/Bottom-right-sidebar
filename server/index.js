@@ -51,8 +51,10 @@ app.get("/yelp/postalCode/:code", function(req, res) {
   });
 });
 
-app.get("/yelp/businessTips", function(req, res) {
-  let q = `SELECT * FROM tip WHERE business_id="" LIMIT 1`;
+app.get("/yelp/businessTips/:id", function(req, res) {
+  var id = req.params.id;
+  console.log(req.params.id, "this is the params id");
+  let q = `SELECT * FROM tip WHERE business_id="${id}" LIMIT 3`;
   connection.query(q, function(err, rows, fields) {
     if (err) throw err;
     console.log(rows, "hi im rows businessTips");
