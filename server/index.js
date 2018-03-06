@@ -51,15 +51,15 @@ app.get("/yelp/postalCode/:code", function(req, res) {
   });
 });
 
-// app.get("/yelp/businessTips", function(req, res) {
-//   let q = "SELECT * FROM tip LIMIT 1";
-//   connection.query(q, function(err, rows, fields) {
-//     if (err) throw err;
-//     console.log(rows, "hi im rows businessTips");
-//     // console.log shows up in node
-//     res.status(201).send(rows);
-//   });
-// });
+app.get("/yelp/businessTips", function(req, res) {
+  let q = `SELECT * FROM tip WHERE business_id="" LIMIT 1`;
+  connection.query(q, function(err, rows, fields) {
+    if (err) throw err;
+    console.log(rows, "hi im rows businessTips");
+    // console.log shows up in node
+    res.status(201).send(rows);
+  });
+});
 
 // needs fixin
 // app.get("/yelp/repos", (req, res) => {
