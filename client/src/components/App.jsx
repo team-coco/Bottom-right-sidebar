@@ -21,29 +21,21 @@ class App extends React.Component {
   componentDidMount() {
     var url = window.location.href.split("/").pop();
     url = url.split("?");
-    console.log(url[0], "this is url[0]");
     axios
       .get("http://localhost:3002/yelp/repos/" + url[0])
       .then(response => {
         this.setState({ business: response.data });
-        console.log(response.data, "THIS IS RESPONSE AND SHOULD BE ON WEBPAGE");
       })
       .then(() => {
         var postalCode = this.state.business[0].postal_code;
         var bizId = this.state.business[0].id;
-        console.log(this.state.business[0].postal_code, "this is here");
-        console.log(this.state.business[0].id, "this is the id");
         this.setState({ postalCode: postalCode });
         this.fetchBusinessIds(postalCode);
         this.fetchTips(bizId);
-        console.log(this.state.postalCode, "this is the second promise");
         // send query to db with new biz ID
       })
-      .then(() => {
-        console.log("we are here now");
-      })
       .catch(err => {
-        console.log(err);
+        console.log(err, "this is the error in the componentDidMount");
       });
   }
 
@@ -54,7 +46,6 @@ class App extends React.Component {
         this.setState({ matchingBiz1: response.data[0] });
         this.setState({ matchingBiz2: response.data[1] });
         this.setState({ matchingBiz3: response.data[2] });
-        console.log(response, "these should be 3 matching zip businesses");
       })
       .catch(err => {
         console.log(err);
@@ -65,7 +56,6 @@ class App extends React.Component {
     axios
       .get("http://localhost:3002/yelp/businessTips/" + bizId)
       .then(response => {
-        console.log(response, "this is response from fetchTips axios react");
         this.setState({ tip1: response.data[0] });
         this.setState({ tip2: response.data[1] });
         this.setState({ tip3: response.data[2] });
