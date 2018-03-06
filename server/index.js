@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const mysql = require("mysql");
+const path = require("path");
 
 // app.use(bodyParser.json());
 app.use(express.static("../client/dist"));
@@ -9,7 +10,7 @@ var connection = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "",
-  database: "yelp_db"
+  database: "chompy"
 });
 
 connection.connect(function(err) {
@@ -20,35 +21,45 @@ connection.connect(function(err) {
   }
 });
 
-app.get("/yelp/repos", function(req, res) {
-  let q = 'SELECT * FROM business WHERE city="Las Vegas" LIMIT 1';
+app.get("/yelp/repos/:id", function(req, res) {
+  var id = req.params.id;
+  // var parm = req;
+  //console.log(id, "this is id");
+  // console.log(parm, "this is id");
+  let q = `SELECT * FROM business WHERE id = "${id}"`;
+  // edit to city of selected city
   connection.query(q, function(err, rows, fields) {
     if (err) throw err;
     console.log(rows, "hi im rows business repo");
-    res.send(201, rows);
+    res.status(201).send(rows);
   });
 });
 
-app.get("/yelp/postalCode", function(req, res) {
-  let q =
-    'SELECT * FROM business WHERE postal_code="89123" AND review_count > 100 LIMIT 3';
+app.get("/yelp/postalCode/:code", function(req, res) {
+  var postalCode = req.params.code;
+  console.log(req.params.code, "this");
+  // var id = req.params.id;
+  // var parm = req.params;
+  // console.log(id, "this is id");
+  // console.log(parm, "this is id");
+  let q = `SELECT * FROM business WHERE postal_code="${postalCode}" AND review_count > 100 LIMIT 3`;
+  // edit to dynamically insert zip code of req.body
   connection.query(q, function(err, rows, fields) {
     if (err) throw err;
     console.log(rows, "hi im rows postalCode");
-    // console.log shows up in node
-    res.send(201, rows);
+    res.status(201).send(rows);
   });
 });
 
-app.get("/yelp/businessTips", function(req, res) {
-  let q = "SELECT * FROM tip LIMIT 1";
-  connection.query(q, function(err, rows, fields) {
-    if (err) throw err;
-    console.log(rows, "hi im rows businessTips");
-    // console.log shows up in node
-    res.send(rows);
-  });
-});
+// app.get("/yelp/businessTips", function(req, res) {
+//   let q = "SELECT * FROM tip LIMIT 1";
+//   connection.query(q, function(err, rows, fields) {
+//     if (err) throw err;
+//     console.log(rows, "hi im rows businessTips");
+//     // console.log shows up in node
+//     res.status(201).send(rows);
+//   });
+// });
 
 // needs fixin
 // app.get("/yelp/repos", (req, res) => {
@@ -62,9 +73,9 @@ app.get("/yelp/businessTips", function(req, res) {
 //   });
 // });
 
-// app.get("/:id", (req, res) => {
-//   res.sendFile(path.join(__dirname + "/../dist/index.html"));
-// });
+app.get("/:id", (req, res) => {
+  res.sendFile(path.join(__dirname + "/../client/dist/index.html"));
+});
 
 app.listen(3002, function() {
   console.log("Listening on 3002!");

@@ -10,39 +10,27 @@ class App extends React.Component {
       business: [{}],
       postalCode: Number,
       matchingBiz1: [{}],
-      tip1: [{}],
       matchingBiz2: [{}],
-      tip2: [{}],
       matchingBiz3: [{}],
+      tip1: [{}],
+      tip2: [{}],
       tip3: [{}]
     };
   }
 
   componentDidMount() {
-    // figure out routing on server side to utilize URL
-    // var url = window.location.href.split("/").pop();
-    // url = url.split("?");
-    // if (url.length > 1) {
-    //   var urlParams = url[1].split("&");
-    //   urlParams = urlParams.reduce(
-    //     (acc, param) => {
-    //       param = param.split("=");
-    //       acc[param[0]] = param[1];
-    //       return acc;
-    //     },
-    //     { id: url[0] }
-    //   );
-    // }
-    // console.log(url[0]);
-
+    var url = window.location.href.split("/").pop();
+    url = url.split("?");
+    console.log(url[0], "this is url[0]");
     axios
-      .get("http://localhost:3002/yelp/repos") // { id: url[0] }
+      .get("http://localhost:3002/yelp/repos/" + url[0]) // { id: url[0] }
       .then(response => {
         this.setState({ business: response.data });
         console.log(response.data, "THIS IS RESPONSE AND SHOULD BE ON WEBPAGE");
       })
       .then(() => {
         var postalCode = this.state.business[0].postal_code;
+        console.log(this.state.business[0].postal_code, "this is here");
         this.setState({ postalCode: postalCode });
         this.fetchBusinessIds(postalCode);
         console.log(this.state.postalCode, "this is the second promise");
@@ -55,7 +43,7 @@ class App extends React.Component {
 
   fetchBusinessIds(postalCode) {
     axios
-      .get("http://localhost:3002/yelp/postalCode", postalCode)
+      .get("http://localhost:3002/yelp/postalCode/" + postalCode)
       .then(response => {
         this.setState({ matchingBiz1: response.data[0] });
         this.setState({ matchingBiz2: response.data[1] });
@@ -67,19 +55,19 @@ class App extends React.Component {
       });
   }
 
-  fetchTips() {
-    axios
-      .get("http://localhost:3002/yelp/businessTips")
-      .then(response => {
-        console.log(response, "this is response from fetchTips axios react");
-        this.setState({ tip1: response.data[0] });
-        this.setState({ tip2: response.data[1] });
-        this.setState({ tip3: response.data[2] });
-      })
-      .catch(error => {
-        console.log(error, "this is error from fetchTips axios react");
-      });
-  }
+  // fetchTips() {
+  //   axios
+  //     .get("http://localhost:3002/yelp/businessTips")
+  //     .then(response => {
+  //       console.log(response, "this is response from fetchTips axios react");
+  //       this.setState({ tip1: response.data[0] });
+  //       this.setState({ tip2: response.data[1] });
+  //       this.setState({ tip3: response.data[2] });
+  //     })
+  //     .catch(error => {
+  //       console.log(error, "this is error from fetchTips axios react");
+  //     });
+  // }
 
   render() {
     return (
