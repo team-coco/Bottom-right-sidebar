@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import axios from "axios";
 
 class App extends React.Component {
@@ -12,9 +11,21 @@ class App extends React.Component {
       matchingBiz1: [{}],
       matchingBiz2: [{}],
       matchingBiz3: [{}],
-      tip1: [{}],
-      tip2: [{}],
-      tip3: [{}]
+      tip1: {
+        text: null,
+        trigger: false
+      },
+      tip2: {
+        text: null,
+        trigger: false
+      },
+      tip3: {
+        text: null,
+        trigger: false
+      },
+      image1: [{}],
+      image2: [{}],
+      image3: [{}]
     };
   }
 
@@ -22,7 +33,7 @@ class App extends React.Component {
     var url = window.location.href.split("/").pop();
     url = url.split("?");
     axios
-      .get("http://localhost:3002/yelp/repos/" + url[0])
+      .get("/sidebar/business/" + url[0])
       .then(response => {
         this.setState({ business: response.data });
       })
@@ -31,8 +42,6 @@ class App extends React.Component {
         var bizId = this.state.business[0].id;
         this.setState({ postalCode: postalCode });
         this.fetchBusinessIds(postalCode);
-        this.fetchTips(bizId);
-        // send query to db with new biz ID
       })
       .catch(err => {
         console.log(err, "this is the error in the componentDidMount");
@@ -41,11 +50,19 @@ class App extends React.Component {
 
   fetchBusinessIds(postalCode) {
     axios
-      .get("http://localhost:3002/yelp/postalCode/" + postalCode)
+      .get("/sidebar/postalCode/" + postalCode)
       .then(response => {
-        this.setState({ matchingBiz1: response.data[0] });
-        this.setState({ matchingBiz2: response.data[1] });
-        this.setState({ matchingBiz3: response.data[2] });
+        var biz1 = response.data[0];
+        var biz2 = response.data[1];
+        var biz3 = response.data[2];
+        this.setState({ matchingBiz1: biz1 });
+        this.setState({ matchingBiz2: biz2 });
+        this.setState({ matchingBiz3: biz3 });
+      })
+      .then(() => {
+        this.fetchTips(this.state.matchingBiz1.id);
+        // this.fetchTips(this.state.matchingBiz2.id);
+        // this.fetchTips(this.state.matchingBiz3.id);
       })
       .catch(err => {
         console.log(err);
@@ -54,11 +71,12 @@ class App extends React.Component {
 
   fetchTips(bizId) {
     axios
-      .get("http://localhost:3002/yelp/businessTips/" + bizId)
+      .get("/sidebar/businessTips/" + bizId)
       .then(response => {
-        this.setState({ tip1: response.data[0] });
-        this.setState({ tip2: response.data[1] });
-        this.setState({ tip3: response.data[2] });
+        if (this.state.tip1.text === null) {
+          this.setState({ tip1: response.data });
+          // use spread operator here
+        }
       })
       .catch(error => {
         console.log(error, "this is error from fetchTips axios react");
@@ -70,27 +88,51 @@ class App extends React.Component {
       <div className="page">
         <h1 className="rightsb_header">Things to Consider</h1>
         <h2 className="rightsb_subheader">People Also Viewed</h2>
-        <p className="rightsb_business">img {this.state.matchingBiz1.name}</p>
+        <p className="rightsb_business">
+          {" "}
+          <span>
+            <img
+              className="image_biz"
+              src={"https://i.imgur.com/STjU6M1.jpg"}
+            />
+            {this.state.matchingBiz1.name}
+          </span>{" "}
+        </p>
         <p className="rightsb_review_count">
           {" "}
           {this.state.matchingBiz1.stars} stars{" "}
           {this.state.matchingBiz1.review_count} reviews
         </p>
-        <p className="rightsb_review_count">{this.state.tip1.text}</p>
-        <p className="rightsb_business">img {this.state.matchingBiz2.name}</p>
+        <p className="rightsb_business">
+          {" "}
+          <span>
+            <img
+              className="image_biz"
+              src={"https://i.imgur.com/HyYYsQT.jpg"}
+            />
+          </span>{" "}
+          {this.state.matchingBiz2.name}
+        </p>
 
         <p className="rightsb_review_count">
           {this.state.matchingBiz2.stars} stars {"    "}
           {this.state.matchingBiz2.review_count} reviews
         </p>
-        <p className="rightsb_review_count">{this.state.tip2.text}</p>
-        <p className="rightsb_business">img {this.state.matchingBiz3.name}</p>
+        <p className="rightsb_business">
+          {" "}
+          <span>
+            <img
+              className="image_biz"
+              src={"https://i.imgur.com/L6Kql0e.jpg"}
+            />
+          </span>{" "}
+          {this.state.matchingBiz3.name}
+        </p>
         <p className="rightsb_review_count">
           {" "}
           {this.state.matchingBiz3.stars} stars
           {this.state.matchingBiz3.review_count} reviews
         </p>
-        <p className="rightsb_review_count">{this.state.tip3.text}</p>
         <h2 className="rightsb_subheader">Other Places Nearby</h2>
         <p className="rightsb_listitem">
           Find more Places Near {this.state.business[0].name}
@@ -147,12 +189,11 @@ class App extends React.Component {
         <h2 className="rightsb_subheader">
           People found {this.state.business[0].name} by searching for...
         </h2>
-        <p className="rightsb_listitem">
-          "Food item" {this.state.business[0].city}
-        </p>
+        <p className="rightsb_listitem">Food {this.state.business[0].city}</p>
         <h2 className="rightsb_subheader">Near Me</h2>
-        <p className="rightsb_listitem">"Food item"</p>
-        <p className="rightsb_listitem">"Food item2"</p>
+        <p className="rightsb_listitem">Dinner</p>
+        <p className="rightsb_listitem">Lunch</p>
+        <p className="rightsb_listitem">Breakfast</p>
       </div>
     );
   }

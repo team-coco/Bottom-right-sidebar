@@ -34,7 +34,18 @@
 }
 
 .rightsb_review_count {
-  font-size: 8px;
+  font-size: 10px;
   color: black;
   font-family: Verdana;
+}
+
+.rightsb_tip {
+  font-size: 10px;
+  color: black;
+  font-family: Verdana;
+}
+
+.image_biz {
+  height: 30px;
+  width: 30px;
 }

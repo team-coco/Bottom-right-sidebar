@@ -14,13 +14,13 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err) {
   if (err) {
-    console.log("ERROR");
+    console.log("mySQL ERROR");
   } else {
-    console.log("MYSQL CONNECTED");
+    console.log("mySQL CONNECTED");
   }
 });
 
-app.get("/yelp/repos/:id", function(req, res) {
+app.get("/sidebar/business/:id", function(req, res) {
   var id = req.params.id;
   let q = `SELECT * FROM business WHERE id = "${id}"`;
   connection.query(q, function(err, rows, fields) {
@@ -29,20 +29,18 @@ app.get("/yelp/repos/:id", function(req, res) {
   });
 });
 
-app.get("/yelp/postalCode/:code", function(req, res) {
+app.get("/sidebar/postalCode/:code", function(req, res) {
   var postalCode = req.params.code;
   let q = `SELECT * FROM business WHERE postal_code="${postalCode}" AND review_count > 100 LIMIT 3`;
-  // edit to dynamically insert zip code of req.body
   connection.query(q, function(err, rows, fields) {
     if (err) throw err;
-    console.log(rows, "hi im rows postalCode");
     res.status(201).send(rows);
   });
 });
 
-app.get("/yelp/businessTips/:id", function(req, res) {
+app.get("/sidebar/businessTips/:id", function(req, res) {
   var id = req.params.id;
-  let q = `SELECT * FROM tip WHERE business_id="${id}" LIMIT 3`;
+  let q = `SELECT * FROM tip WHERE business_id="${id}" LIMIT 1`;
   connection.query(q, function(err, rows, fields) {
     if (err) throw err;
     res.status(201).send(rows);
