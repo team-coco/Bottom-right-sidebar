@@ -59,29 +59,29 @@ class App extends React.Component {
         this.setState({ matchingBiz2: biz2 });
         this.setState({ matchingBiz3: biz3 });
       })
-      .then(() => {
-        this.fetchTips(this.state.matchingBiz1.id);
-        // this.fetchTips(this.state.matchingBiz2.id);
-        // this.fetchTips(this.state.matchingBiz3.id);
-      })
+      // .then(() => {
+      //   this.fetchTips(this.state.matchingBiz1.id);
+      // this.fetchTips(this.state.matchingBiz2.id);
+      // this.fetchTips(this.state.matchingBiz3.id);
+      // })
       .catch(err => {
         console.log(err);
       });
   }
 
-  fetchTips(bizId) {
-    axios
-      .get("/sidebar/businessTips/" + bizId)
-      .then(response => {
-        if (this.state.tip1.text === null) {
-          this.setState({ tip1: response.data });
-          // use spread operator here
-        }
-      })
-      .catch(error => {
-        console.log(error, "this is error from fetchTips axios react");
-      });
-  }
+  // fetchTips(bizId) {
+  //   axios
+  //     .get("/sidebar/businessTips/" + bizId)
+  //     .then(response => {
+  //       // if (this.state.tip1.text === null) {
+  //       //   this.setState({ tip1: response.data });
+  //       //   // use spread operator here
+  //       // }
+  //     })
+  //     .catch(error => {
+  //       console.log(error, "this is error from fetchTips axios react");
+  //     });
+  // }
 
   render() {
     return (
