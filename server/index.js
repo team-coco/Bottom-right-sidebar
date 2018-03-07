@@ -8,7 +8,6 @@ app.use(express.static("../client/dist"));
 var connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "",
   database: "chompy"
 });
 
