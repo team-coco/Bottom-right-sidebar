@@ -14,11 +14,13 @@ module.exports = {
         test: /\.jsx?/,
         include: SRC_DIR,
         loader: "babel-loader",
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
         query: {
           presets: ["react", "env"]
         }
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"]
       }
     ]
   }
