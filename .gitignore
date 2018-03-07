@@ -57,4 +57,4 @@ typings/
 # dotenv environment variables file
 .env
 
-client/dist
+client/dist/bundle.js

@@ -1,7 +1,8 @@
 {
   "name": "bottom-right-sidebar",
   "version": "1.0.0",
-  "description": "Bottom right sidebar (People also viewed, Lists including..., You might also consider, Nearby...)",
+  "description":
+    "Bottom right sidebar (People also viewed, Lists including..., You might also consider, Nearby...)",
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./server/index.js",
@@ -19,8 +20,6 @@
   },
   "homepage": "https://github.com/codenamesgroup/Bottom-right-sidebar#readme",
   "dependencies": {
-    "@fortawesome/fontawesome": "^1.1.4",
-    "@fortawesome/react-fontawesome": "0.0.17",
     "axios": "^0.18.0",
     "css-loader": "^0.28.10",
     "has-flag": "^3.0.0",

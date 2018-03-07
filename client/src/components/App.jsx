@@ -11,18 +11,18 @@ class App extends React.Component {
       matchingBiz1: [{}],
       matchingBiz2: [{}],
       matchingBiz3: [{}],
-      tip1: {
-        text: null,
-        trigger: false
-      },
-      tip2: {
-        text: null,
-        trigger: false
-      },
-      tip3: {
-        text: null,
-        trigger: false
-      },
+      // tip1: {
+      //   text: null,
+      //   trigger: false
+      // },
+      // tip2: {
+      //   text: null,
+      //   trigger: false
+      // },
+      // tip3: {
+      //   text: null,
+      //   trigger: false
+      // },
       image1: [{}],
       image2: [{}],
       image3: [{}]
