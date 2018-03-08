@@ -109,9 +109,13 @@ class App extends React.Component {
           <span>
             <img
               className="image_biz"
-              src={"https://i.imgur.com/STjU6M1.jpg"}
-            />
-            {this.state.matchBiz1.name}
+              src={`https://s3-media3.fl.yelpcdn.com/bphoto/${
+                this.state.photo1
+              }/120s.jpg`}
+            />{" "}
+            <span className="rightsb_matchBiz">
+              {this.state.matchBiz1.name}
+            </span>
           </span>{" "}
         </p>
         <p className="rightsb_review_count">
@@ -119,37 +123,47 @@ class App extends React.Component {
           {this.state.matchBiz1.stars} stars {this.state.matchBiz1.review_count}{" "}
           reviews
         </p>
-        <p className="rightsb_tips" />
+        <p className="rightsb_tips">{this.state.tip1}</p>
         <p className="rightsb_business">
           {" "}
           <span>
             <img
               className="image_biz"
-              src={"https://i.imgur.com/HyYYsQT.jpg"}
-            />
-          </span>{" "}
-          {this.state.matchBiz2.name}
+              src={`https://s3-media3.fl.yelpcdn.com/bphoto/${
+                this.state.photo2
+              }/120s.jpg`}
+            />{" "}
+            <span className="rightsb_matchBiz">
+              {this.state.matchBiz2.name}
+            </span>
+          </span>
         </p>
 
         <p className="rightsb_review_count">
           {this.state.matchBiz2.stars} stars {"    "}
           {this.state.matchBiz2.review_count} reviews
         </p>
+        <p className="rightsb_tips">{this.state.tip2}</p>
         <p className="rightsb_business">
           {" "}
           <span>
             <img
               className="image_biz"
-              src={"https://i.imgur.com/L6Kql0e.jpg"}
-            />
-          </span>{" "}
-          {this.state.matchBiz3.name}
+              src={`https://s3-media3.fl.yelpcdn.com/bphoto/${
+                this.state.photo3
+              }/120s.jpg`}
+            />{" "}
+            <span className="rightsb_matchBiz">
+              {this.state.matchBiz3.name}
+            </span>
+          </span>
         </p>
         <p className="rightsb_review_count">
           {" "}
-          {this.state.matchBiz3.stars} stars
+          {this.state.matchBiz3.stars} stars {"  "}
           {this.state.matchBiz3.review_count} reviews
         </p>
+        <p className="rightsb_tips">{this.state.tip3}</p>
         <h2 className="rightsb_subheader">Other Places Nearby</h2>
         <p className="rightsb_listitem">
           Find more Places Near {this.state.business[0].name}
@@ -165,23 +179,27 @@ class App extends React.Component {
           {" "}
           <span>
             <img className="image" src={"https://i.imgur.com/YVTtcKY.png"} />
+            {"  "}
           </span>Restaurants
         </p>
         <p className="rightsb_listitem">
           {" "}
           <span>
             <img className="image" src={"https://i.imgur.com/f3RdwOP.png"} />
+            {"  "}
           </span>Nightlife
         </p>
         <p className="rightsb_listitem">
           {" "}
           <span>
             <img className="image" src={"https://i.imgur.com/2sYyjqj.jpg"} />
+            {"  "}
           </span>Shopping
         </p>
         <p className="rightsb_listitem">
           <span>
             <img className="image" src={"https://i.imgur.com/aAnrFk2.png"} />
+            {"  "}
           </span>Show All
         </p>
         <h2 className="rightsb_subheader">
@@ -190,11 +208,14 @@ class App extends React.Component {
         <p className="rightsb_listitem">
           <span>
             <img className="image" src={"https://i.imgur.com/rAokCAc.jpg"} />
+            {"  "}
+            {"  "}
           </span>Search for Reservations
         </p>
         <p className="rightsb_listitem">
           <span>
             <img className="image" src={"https://i.imgur.com/gc2EsDX.png"} />
+            {"  "}
           </span>Book a table in {this.state.business[0].city}
         </p>
         <h2 className="rightsb_subheader">

@@ -1,7 +1,7 @@
 .page {
-  position: absolute;
+  /* position: absolute;
   top: 100%;
-  right: 0%;
+  right: 0%; */
 }
 
 .rightsb_header {
@@ -39,7 +39,7 @@
   font-family: Verdana;
 }
 
-.rightsb_tip {
+.rightsb_tips {
   font-size: 10px;
   color: black;
   font-family: Verdana;
