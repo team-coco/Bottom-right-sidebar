@@ -8,21 +8,15 @@ class App extends React.Component {
     this.state = {
       business: [{}],
       postalCode: Number,
-      matchingBiz1: [{}],
-      matchingBiz2: [{}],
-      matchingBiz3: [{}],
-      // tip1: {
-      //   text: null,
-      //   trigger: false
-      // },
-      // tip2: {
-      //   text: null,
-      //   trigger: false
-      // },
-      // tip3: {
-      //   text: null,
-      //   trigger: false
-      // },
+      matchBiz1: [{}],
+      matchBiz2: [{}],
+      matchBiz3: [{}],
+      tip1: null,
+      tip2: null,
+      tip3: null,
+      photo1: null,
+      photo2: null,
+      photo3: null,
       image1: [{}],
       image2: [{}],
       image3: [{}]
@@ -52,36 +46,58 @@ class App extends React.Component {
     axios
       .get("/sidebar/postalCode/" + postalCode)
       .then(response => {
+        console.log(response.data, "we expect 3 matching businesses");
         var biz1 = response.data[0];
         var biz2 = response.data[1];
         var biz3 = response.data[2];
-        this.setState({ matchingBiz1: biz1 });
-        this.setState({ matchingBiz2: biz2 });
-        this.setState({ matchingBiz3: biz3 });
+        this.setState({ matchBiz1: biz1 });
+        this.setState({ matchBiz2: biz2 });
+        this.setState({ matchBiz3: biz3 });
+        this.fetchTips(this.state.matchBiz1.id);
+        this.fetchTips(this.state.matchBiz2.id);
+        this.fetchTips(this.state.matchBiz3.id);
+        this.fetchPhotos(this.state.matchBiz1.id);
+        this.fetchPhotos(this.state.matchBiz2.id);
+        this.fetchPhotos(this.state.matchBiz3.id);
       })
-      // .then(() => {
-      //   this.fetchTips(this.state.matchingBiz1.id);
-      // this.fetchTips(this.state.matchingBiz2.id);
-      // this.fetchTips(this.state.matchingBiz3.id);
-      // })
       .catch(err => {
         console.log(err);
       });
   }
 
-  // fetchTips(bizId) {
-  //   axios
-  //     .get("/sidebar/businessTips/" + bizId)
-  //     .then(response => {
-  //       // if (this.state.tip1.text === null) {
-  //       //   this.setState({ tip1: response.data });
-  //       //   // use spread operator here
-  //       // }
-  //     })
-  //     .catch(error => {
-  //       console.log(error, "this is error from fetchTips axios react");
-  //     });
-  // }
+  fetchPhotos(bizId) {
+    axios
+      .get("/sidebar/photos/" + bizId)
+      .then(response => {
+        if (this.state.photo1 === null) {
+          this.setState({ photo1: response.data[0].id });
+        } else if (this.state.photo2 === null) {
+          this.setState({ photo2: response.data[0].id });
+        } else if (this.state.photo3 === null) {
+          this.setState({ photo3: response.data[0].id });
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  fetchTips(bizId) {
+    axios
+      .get("/sidebar/businessTips/" + bizId)
+      .then(response => {
+        if (this.state.tip1 === null) {
+          this.setState({ tip1: response.data[0].text });
+        } else if (this.state.tip2 === null) {
+          this.setState({ tip2: response.data[0].text });
+        } else if (this.state.tip3 === null) {
+          this.setState({ tip3: response.data[0].text });
+        }
+      })
+      .catch(error => {
+        console.log(error, "this is error from fetchTips axios react");
+      });
+  }
 
   render() {
     return (
@@ -95,14 +111,15 @@ class App extends React.Component {
               className="image_biz"
               src={"https://i.imgur.com/STjU6M1.jpg"}
             />
-            {this.state.matchingBiz1.name}
+            {this.state.matchBiz1.name}
           </span>{" "}
         </p>
         <p className="rightsb_review_count">
           {" "}
-          {this.state.matchingBiz1.stars} stars{" "}
-          {this.state.matchingBiz1.review_count} reviews
+          {this.state.matchBiz1.stars} stars {this.state.matchBiz1.review_count}{" "}
+          reviews
         </p>
+        <p className="rightsb_tips" />
         <p className="rightsb_business">
           {" "}
           <span>
@@ -111,12 +128,12 @@ class App extends React.Component {
               src={"https://i.imgur.com/HyYYsQT.jpg"}
             />
           </span>{" "}
-          {this.state.matchingBiz2.name}
+          {this.state.matchBiz2.name}
         </p>
 
         <p className="rightsb_review_count">
-          {this.state.matchingBiz2.stars} stars {"    "}
-          {this.state.matchingBiz2.review_count} reviews
+          {this.state.matchBiz2.stars} stars {"    "}
+          {this.state.matchBiz2.review_count} reviews
         </p>
         <p className="rightsb_business">
           {" "}
@@ -126,12 +143,12 @@ class App extends React.Component {
               src={"https://i.imgur.com/L6Kql0e.jpg"}
             />
           </span>{" "}
-          {this.state.matchingBiz3.name}
+          {this.state.matchBiz3.name}
         </p>
         <p className="rightsb_review_count">
           {" "}
-          {this.state.matchingBiz3.stars} stars
-          {this.state.matchingBiz3.review_count} reviews
+          {this.state.matchBiz3.stars} stars
+          {this.state.matchBiz3.review_count} reviews
         </p>
         <h2 className="rightsb_subheader">Other Places Nearby</h2>
         <p className="rightsb_listitem">

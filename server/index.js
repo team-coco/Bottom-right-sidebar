@@ -3,7 +3,7 @@ const app = express();
 const mysql = require("mysql");
 const path = require("path");
 
-app.use(express.static("../client/dist"));
+app.use(express.static("../client/dist/"));
 
 var connection = mysql.createConnection({
   host: "localhost",
@@ -42,6 +42,17 @@ app.get("/sidebar/businessTips/:id", function(req, res) {
   let q = `SELECT * FROM tip WHERE business_id="${id}" LIMIT 1`;
   connection.query(q, function(err, rows, fields) {
     if (err) throw err;
+    res.status(201).send(rows);
+  });
+});
+
+app.get("/sidebar/photos/:id", function(req, res) {
+  var id = req.params.id;
+  console.log(id, "this is business id");
+  let q = `SELECT * FROM photo WHERE business_id="${id}" LIMIT 1`;
+  connection.query(q, function(err, rows, fields) {
+    if (err) throw error;
+    console.log(rows);
     res.status(201).send(rows);
   });
 });
