@@ -3,6 +3,10 @@
   top: 100%;
   right: 0%; */
 }
+.rightsb_matchBiz {
+  font-size: 15px;
+  color: #16c600;
+}
 
 .rightsb_header {
   font-size: 12px;
@@ -17,10 +21,8 @@
 }
 
 .rightsb_business {
-  font-size: 10px;
   color: #3070b6;
   font-family: Verdana;
-  font-weight: bold;
 }
 
 .rightsb_listitem {
@@ -45,7 +47,7 @@
   font-family: Verdana;
 }
 
-.image_biz {
-  height: 30px;
-  width: 30px;
+.rightsb_image_biz {
+  height: 70px;
+  width: 70px;
 }

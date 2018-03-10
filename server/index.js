@@ -5,10 +5,11 @@ const path = require("path");
 
 app.use(express.static("./client/dist/"));
 
-var connection = mysql.createConnection({
-  host: "localhost",
+const connection = mysql.createConnection({
+  host: "chompy-test-database.cr8yw4uwndba.us-west-1.rds.amazonaws.com",
   user: "root",
-  database: "chompy"
+  database: "chompyremote",
+  password: "chompydatabase"
 });
 
 connection.connect(function(err) {

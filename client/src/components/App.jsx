@@ -25,6 +25,8 @@ class App extends React.Component {
 
   componentDidMount() {
     var url = window.location.href.split("/").pop();
+    url =
+      url.charAt(url.length - 1) === "/" ? url.substr(0, url.length - 1) : url;
     url = url.split("?");
     axios
       .get("/sidebar/business/" + url[0])
@@ -46,13 +48,12 @@ class App extends React.Component {
     axios
       .get("/sidebar/postalCode/" + postalCode)
       .then(response => {
-        console.log(response.data, "we expect 3 matching businesses");
         var biz1 = response.data[0];
         var biz2 = response.data[1];
         var biz3 = response.data[2];
-        this.setState({ matchBiz1: biz1 });
-        this.setState({ matchBiz2: biz2 });
-        this.setState({ matchBiz3: biz3 });
+        this.setState({ matchBiz1: biz1, matchBiz2: biz2, matchBiz3: biz3 });
+        // this.setState({ matchBiz2: biz2 });
+        // this.setState({ matchBiz3: biz3 });
         this.fetchTips(this.state.matchBiz1.id);
         this.fetchTips(this.state.matchBiz2.id);
         this.fetchTips(this.state.matchBiz3.id);
@@ -61,7 +62,7 @@ class App extends React.Component {
         this.fetchPhotos(this.state.matchBiz3.id);
       })
       .catch(err => {
-        console.log(err);
+        console.log(err, "error fetch postalCode axios");
       });
   }
 
@@ -78,7 +79,7 @@ class App extends React.Component {
         }
       })
       .catch(error => {
-        console.log(error);
+        console.log(error, "error fetchphotos axios");
       });
   }
 
@@ -95,7 +96,7 @@ class App extends React.Component {
         }
       })
       .catch(error => {
-        console.log(error, "this is error from fetchTips axios react");
+        console.log(error, "error from fetchTips axios react");
       });
   }
 
@@ -104,60 +105,44 @@ class App extends React.Component {
       <div className="page">
         <h1 className="rightsb_header">Things to Consider</h1>
         <h2 className="rightsb_subheader">People Also Viewed</h2>
-        <p className="rightsb_business">
-          {" "}
-          <span>
-            <img
-              className="image_biz"
-              src={`https://s3-media3.fl.yelpcdn.com/bphoto/${
-                this.state.photo1
-              }/120s.jpg`}
-            />{" "}
-            <span className="rightsb_matchBiz">
-              {this.state.matchBiz1.name}
-            </span>
-          </span>{" "}
-        </p>
+        <span className="rightsb_suggestedBiz">
+          <img
+            className="rightsb_image_biz"
+            src={`https://s3-media3.fl.yelpcdn.com/bphoto/${
+              this.state.photo1
+            }/120s.jpg`}
+          />{" "}
+          <span className="rightsb_matchBiz">{this.state.matchBiz1.name}</span>
+        </span>{" "}
         <p className="rightsb_review_count">
           {" "}
           {this.state.matchBiz1.stars} stars {this.state.matchBiz1.review_count}{" "}
           reviews
         </p>
         <p className="rightsb_tips">{this.state.tip1}</p>
-        <p className="rightsb_business">
-          {" "}
-          <span>
-            <img
-              className="image_biz"
-              src={`https://s3-media3.fl.yelpcdn.com/bphoto/${
-                this.state.photo2
-              }/120s.jpg`}
-            />{" "}
-            <span className="rightsb_matchBiz">
-              {this.state.matchBiz2.name}
-            </span>
-          </span>
-        </p>
-
+        <span className="rightsb_suggestedBiz">
+          <img
+            className="rightsb_image_biz"
+            src={`https://s3-media3.fl.yelpcdn.com/bphoto/${
+              this.state.photo2
+            }/120s.jpg`}
+          />{" "}
+          <span className="rightsb_matchBiz">{this.state.matchBiz2.name}</span>
+        </span>
         <p className="rightsb_review_count">
           {this.state.matchBiz2.stars} stars {"    "}
           {this.state.matchBiz2.review_count} reviews
         </p>
         <p className="rightsb_tips">{this.state.tip2}</p>
-        <p className="rightsb_business">
-          {" "}
-          <span>
-            <img
-              className="image_biz"
-              src={`https://s3-media3.fl.yelpcdn.com/bphoto/${
-                this.state.photo3
-              }/120s.jpg`}
-            />{" "}
-            <span className="rightsb_matchBiz">
-              {this.state.matchBiz3.name}
-            </span>
-          </span>
-        </p>
+        <span className="rightsb_suggestedBiz">
+          <img
+            className="rightsb_image_biz"
+            src={`https://s3-media3.fl.yelpcdn.com/bphoto/${
+              this.state.photo3
+            }/120s.jpg`}
+          />{" "}
+          <span className="rightsb_matchBiz">{this.state.matchBiz3.name}</span>
+        </span>
         <p className="rightsb_review_count">
           {" "}
           {this.state.matchBiz3.stars} stars {"  "}

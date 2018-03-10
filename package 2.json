@@ -1,13 +1,13 @@
 {
   "name": "bottom-right-sidebar",
   "version": "1.0.0",
-  "description": "Bottom right sidebar (People also viewed, Lists including..., You might also consider, Nearby...)",
+  "description":
+    "Bottom right sidebar (People also viewed, Lists including..., You might also consider, Nearby...)",
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./server/index.js",
-    "react-dev": "webpack -d --watch",
-    "test": "jest",
-    "docker": "node ./server/index.js && webpack -d"
+    "react-dev": "webpack -d --watch ",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
