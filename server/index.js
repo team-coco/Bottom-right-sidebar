@@ -31,7 +31,7 @@ app.get("/sidebar/business/:id", function(req, res) {
 
 app.get("/sidebar/postalCode/:code", function(req, res) {
   var postalCode = req.params.code;
-  let q = `SELECT * FROM business WHERE postal_code="${postalCode}" AND review_count > 100 LIMIT 3`;
+  let q = `SELECT * FROM business WHERE postal_code="${postalCode}" AND review_count > 200 LIMIT 4`;
   connection.query(q, function(err, rows, fields) {
     if (err) throw err;
     res.status(201).send(rows);

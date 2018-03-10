@@ -51,14 +51,14 @@ class App extends React.Component {
     axios
       .get("/sidebar/postalCode/" + postalCode)
       .then(response => {
-        var biz1 = response.data[0];
-        var biz2 = response.data[1];
-        var biz3 = response.data[2];
+        var biz1 = response.data[1];
+        var biz2 = response.data[2];
+        var biz3 = response.data[3];
         this.setState({ matchBiz1: biz1, matchBiz2: biz2, matchBiz3: biz3 });
         this.setStars(biz1.stars);
         this.setStars(biz2.stars);
         this.setStars(biz3.stars);
-        this.fetchTips(biz1.id);
+        this.fetchTips(this.state.matchBiz1.id);
         this.fetchTips(biz2.id);
         this.fetchTips(biz3.id);
         this.fetchPhotos(this.state.matchBiz1.id);
