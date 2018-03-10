@@ -19,7 +19,10 @@ class App extends React.Component {
       photo3: null,
       image1: [{}],
       image2: [{}],
-      image3: [{}]
+      image3: [{}],
+      starRating1: null,
+      starRating2: null,
+      starRating3: null
     };
   }
 
@@ -52,14 +55,15 @@ class App extends React.Component {
         var biz2 = response.data[1];
         var biz3 = response.data[2];
         this.setState({ matchBiz1: biz1, matchBiz2: biz2, matchBiz3: biz3 });
-        // this.setState({ matchBiz2: biz2 });
-        // this.setState({ matchBiz3: biz3 });
-        this.fetchTips(this.state.matchBiz1.id);
-        this.fetchTips(this.state.matchBiz2.id);
-        this.fetchTips(this.state.matchBiz3.id);
-        this.fetchPhotos(this.state.matchBiz1.id);
-        this.fetchPhotos(this.state.matchBiz2.id);
-        this.fetchPhotos(this.state.matchBiz3.id);
+        this.setStars(biz1.stars);
+        this.setStars(biz2.stars);
+        this.setStars(biz3.stars);
+        this.fetchTips(biz1.id);
+        this.fetchTips(biz2.id);
+        this.fetchTips(biz3.id);
+        this.fetchPhotos(biz1.id);
+        this.fetchPhotos(biz1.id);
+        this.fetchPhotos(biz1.id);
       })
       .catch(err => {
         console.log(err, "error fetch postalCode axios");
@@ -100,6 +104,136 @@ class App extends React.Component {
       });
   }
 
+  setStars(stars) {
+    if (stars === 1) {
+      if (this.state.starRating1 === null) {
+        this.setState({
+          starRating1: "https://i.imgur.com/joRV605.png"
+        });
+      } else if (this.state.starRating2 === null) {
+        this.setState({
+          starRating2: "https://i.imgur.com/joRV605.png"
+        });
+      } else if (this.state.starRating3 === null) {
+        this.setState({
+          starRating3: "https://i.imgur.com/joRV605.png"
+        });
+      }
+    } else if (stars === 1.5) {
+      if (this.state.starRating1 === null) {
+        this.setState({
+          starRating1: "https://i.imgur.com/fqHSmyz.png"
+        });
+      } else if (this.state.starRating2 === null) {
+        this.setState({
+          starRating2: "https://i.imgur.com/fqHSmyz.png"
+        });
+      } else if (this.state.starRating3 === null) {
+        this.setState({
+          starRating3: "https://i.imgur.com/fqHSmyz.png"
+        });
+      }
+    } else if (stars === 2) {
+      if (this.state.starRating1 === null) {
+        this.setState({
+          starRating1: "https://i.imgur.com/GsBh9O5.png"
+        });
+      } else if (this.state.starRating2 === null) {
+        this.setState({
+          starRating2: "https://i.imgur.com/GsBh9O5.png"
+        });
+      } else if (this.state.starRating3 === null) {
+        this.setState({
+          starRating3: "https://i.imgur.com/GsBh9O5.png"
+        });
+      }
+    } else if (stars === 2.5) {
+      if (this.state.starRating1 === null) {
+        this.setState({
+          starRating1: "https://i.imgur.com/HHk4ca7.png"
+        });
+      } else if (this.state.starRating2 === null) {
+        this.setState({
+          starRating2: "https://i.imgur.com/HHk4ca7.png"
+        });
+      } else if (this.state.starRating3 === null) {
+        this.setState({
+          starRating3: "https://i.imgur.com/HHk4ca7.png"
+        });
+      }
+    } else if (stars === 3) {
+      if (this.state.starRating1 === null) {
+        this.setState({
+          starRating1: "https://i.imgur.com/eXa2t1X.png"
+        });
+      } else if (this.state.starRating2 === null) {
+        this.setState({
+          starRating2: "https://i.imgur.com/eXa2t1X.png"
+        });
+      } else if (this.state.starRating3 === null) {
+        this.setState({
+          starRating3: "https://i.imgur.com/eXa2t1X.png"
+        });
+      }
+    } else if (stars === 3.5) {
+      if (this.state.starRating1 === null) {
+        this.setState({
+          starRating1: "https://i.imgur.com/nDcH9au.png"
+        });
+      } else if (this.state.starRating2 === null) {
+        this.setState({
+          starRating2: "https://i.imgur.com/nDcH9au.png"
+        });
+      } else if (this.state.starRating3 === null) {
+        this.setState({
+          starRating3: "https://i.imgur.com/nDcH9au.png"
+        });
+      }
+    } else if (stars === 4) {
+      if (this.state.starRating1 === null) {
+        this.setState({
+          starRating1: "https://i.imgur.com/v2Ep8kQ.png"
+        });
+      } else if (this.state.starRating2 === null) {
+        this.setState({
+          starRating2: "https://i.imgur.com/v2Ep8kQ.png"
+        });
+      } else if (this.state.starRating3 === null) {
+        this.setState({
+          starRating3: "https://i.imgur.com/v2Ep8kQ.png"
+        });
+      }
+    } else if (stars === 4.5) {
+      if (this.state.starRating1 === null) {
+        this.setState({
+          starRating1: "https://i.imgur.com/e2b0NN4.png"
+        });
+      } else if (this.state.starRating2 === null) {
+        this.setState({
+          starRating2: "https://i.imgur.com/e2b0NN4.png"
+        });
+      } else if (this.state.starRating3 === null) {
+        this.setState({
+          starRating3: "https://i.imgur.com/e2b0NN4.png"
+        });
+      }
+    } else if (stars === 5) {
+      if (this.state.starRating1 === null) {
+        this.setState({
+          starRating1: "https://i.imgur.com/327Fh6y.png"
+        });
+      } else if (this.state.starRating2 === null) {
+        this.setState({
+          starRating2: "https://i.imgur.com/327Fh6y.png"
+        });
+      } else if (this.state.starRating3 === null) {
+        this.setState({
+          starRating3: "https://i.imgur.com/327Fh6y.png"
+        });
+      }
+    }
+  }
+
   render() {
     return (
       <div className="page">
@@ -124,7 +258,10 @@ class App extends React.Component {
                   </div>
                   <div className="rightsb_bizrating">
                     <div className="rightsb_star-rating">
-                      {this.state.matchBiz1.stars} STARS
+                      <img
+                        className="rightsb_stars"
+                        src={this.state.starRating1}
+                      />
                     </div>
                     <span className="rightsb_review-count">
                       {this.state.matchBiz1.review_count} reviews
@@ -152,7 +289,10 @@ class App extends React.Component {
                   </div>
                   <div className="rightsb_bizrating">
                     <div className="rightsb_star-rating">
-                      {this.state.matchBiz2.stars} STARS
+                      <img
+                        className="rightsb_stars"
+                        src={this.state.starRating2}
+                      />
                     </div>
                     <span className="rightsb_review-count">
                       {this.state.matchBiz2.review_count} reviews
@@ -180,7 +320,10 @@ class App extends React.Component {
                   </div>
                   <div className="rightsb_bizrating">
                     <div className="rightsb_star-rating">
-                      {this.state.matchBiz3.stars} STARS
+                      <img
+                        className="rightsb_stars"
+                        src={this.state.starRating3}
+                      />
                     </div>
                     <span className="rightsb_review-count">
                       {this.state.matchBiz3.review_count} reviews
@@ -223,7 +366,7 @@ class App extends React.Component {
                     />
                     {"  "}
                   </span>
-                  <span>Restaurants</span>
+                  <span className="rightsb_browse-list">Restaurants</span>
                 </a>
               </li>
               <li>
@@ -236,7 +379,7 @@ class App extends React.Component {
                     />
                     {"  "}
                   </span>
-                  <span>Nightlife</span>
+                  <span className="rightsb_browse-list">Nightlife</span>
                 </a>
               </li>
               <li>
@@ -248,7 +391,7 @@ class App extends React.Component {
                     />
                     {"  "}
                   </span>
-                  <span>Shopping</span>
+                  <span className="rightsb_browse-list">Shopping</span>
                 </a>
               </li>
               <li>
@@ -260,7 +403,7 @@ class App extends React.Component {
                     />
                     {"  "}
                   </span>
-                  <span>Show All</span>
+                  <span className="rightsb_browse-list">Show All</span>
                 </a>
               </li>
             </ul>
@@ -279,7 +422,9 @@ class App extends React.Component {
                     />
                     {"  "}
                   </span>
-                  <span>Search for Reservations</span>
+                  <span className="rightsb_dining-list">
+                    Search for Reservations
+                  </span>
                 </a>
               </li>
               <li>
@@ -291,25 +436,29 @@ class App extends React.Component {
                     />
                     {"  "}
                   </span>
-                  <span>Book a table in {this.state.business[0].city}</span>
                 </a>
+                <span className="rightsb_dining-list">
+                  Book a table in {this.state.business[0].city}
+                </span>
               </li>
             </ul>
           </div>
           <h2 className="rightsb_subheader">
             Best of {this.state.business[0].city}
           </h2>
-          <p className="rightsb_listitem">
+          <p className="rightsb_bestof-list">
             Things to do in {this.state.business[0].city}
           </p>
           <h2 className="rightsb_subheader">
             People found {this.state.business[0].name} by searching for...
           </h2>
-          <p className="rightsb_listitem">Food {this.state.business[0].city}</p>
+          <p className="rightsb_peoplefound-list">
+            Food {this.state.business[0].city}
+          </p>
           <h2 className="rightsb_subheader">Near Me</h2>
-          <p className="rightsb_listitem">Dinner</p>
-          <p className="rightsb_listitem">Lunch</p>
-          <p className="rightsb_listitem">Breakfast</p>
+          <p className="rightsb_nearme-list">Dinner</p>
+          <p className="rightsb_nearme-list">Lunch</p>
+          <p className="rightsb_nearme-list">Breakfast</p>
         </div>
       </div>
     );

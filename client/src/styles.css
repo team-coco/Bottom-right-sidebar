@@ -70,16 +70,25 @@
 .rightsb_tips {
   font-size: 15px;
   quotes: none;
+  font-style: italic;
+}
+
+.rightsb_other-list-item-arrange {
+  margin-bottom: 12px;
+  color: rgb(0, 115, 187);
 }
 
 .rightsb_list {
   list-style-type: none;
   list-style-position: initial;
   list-style-image: initial;
+  list-style: none;
+  padding-left: 0;
 }
 
 .rightsb_other-list-item {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+  color: rgb(0, 115, 187);
 }
 
 .rightsb_other-list-item-arrange {
@@ -91,4 +100,30 @@
 .rightsb_icon {
   width: 10px;
   height: 10px;
+}
+
+.rightsb_browse-list {
+  margin-bottom: 10px;
+  color: rgb(0, 115, 187);
+}
+
+.rightsb_dining-list {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: rgb(0, 115, 187);
+}
+
+.rightsb_bestof-list {
+  margin-bottom: 10px;
+  color: rgb(0, 115, 187);
+}
+
+.rightsb_peoplefound-list {
+  margin-bottom: 10px;
+  color: rgb(0, 115, 187);
+}
+
+.rightsb_nearme-list {
+  margin-bottom: 10px;
+  color: rgb(0, 115, 187);
 }
