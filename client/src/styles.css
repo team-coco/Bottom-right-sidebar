@@ -1,53 +1,94 @@
-.page {
-  /* position: absolute;
-  top: 100%;
-  right: 0%; */
-}
-.rightsb_matchBiz {
-  font-size: 15px;
-  color: #16c600;
-}
-
-.rightsb_header {
-  font-size: 12px;
-  color: #16c600;
-  font-family: Verdana;
-}
-
 .rightsb_subheader {
-  font-size: 10px;
-  color: #16c600;
-  font-family: Verdana;
+  font-family: Helvetica Neue;
+  color: rgb(211, 35, 35);
+  display: block;
+  margin-bottom: 12px;
+  word-wrap: break-word !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 1.3125em;
+}
+.rightsb_business-list {
+  margin-bottom: 12px;
+  list-style-type: none;
 }
 
-.rightsb_business {
-  color: #3070b6;
-  font-family: Verdana;
+.rightsb_media-block {
+  position: relative;
+  display: flex;
 }
 
-.rightsb_listitem {
-  font-size: 10px;
-  color: #3070b6;
-  font-family: Verdana;
-}
-.image {
-  height: 10px;
-  width: 10px;
+.rightsb_media-avatar {
+  border-right-width: 12px;
+  border-right-style: solid;
+  border-right-color: transparent;
 }
 
-.rightsb_review_count {
-  font-size: 10px;
-  color: black;
-  font-family: Verdana;
-}
-
-.rightsb_tips {
-  font-size: 10px;
-  color: black;
-  font-family: Verdana;
+.rightsb_image_box {
 }
 
 .rightsb_image_biz {
   height: 70px;
   width: 70px;
+}
+
+.rightsb_media-story {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%;
+  min-width: 0;
+  min-height: 0;
+}
+.rightsb_media-title {
+  font-weight: bold;
+  color: #0073bb;
+  font-family: Helvetica Neue;
+}
+
+.rightsb_bizrating {
+  margin-top: 3px;
+  margin-right: 0px;
+  margin-bottom: 3px;
+  margin-left: 0px;
+}
+
+.rightsb_star-rating {
+  float: left;
+  margin-top: 1px;
+  margin-right: 6px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+}
+
+.rightsb_review-count {
+  font-size: 12px;
+  line-height: 1.5em;
+}
+
+.rightsb_tips {
+  font-size: 15px;
+  quotes: none;
+}
+
+.rightsb_list {
+  list-style-type: none;
+  list-style-position: initial;
+  list-style-image: initial;
+}
+
+.rightsb_other-list-item {
+  margin-bottom: 12px;
+}
+
+.rightsb_other-list-item-arrange {
+  margin-left: -6px;
+  margin-right: -6px;
+  border-collapse: separate;
+}
+
+.rightsb_icon {
+  width: 10px;
+  height: 10px;
 }

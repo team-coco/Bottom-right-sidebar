@@ -103,120 +103,214 @@ class App extends React.Component {
   render() {
     return (
       <div className="page">
-        <h1 className="rightsb_header">Things to Consider</h1>
-        <h2 className="rightsb_subheader">People Also Viewed</h2>
-        <span className="rightsb_suggestedBiz">
-          <img
-            className="rightsb_image_biz"
-            src={`https://s3-media3.fl.yelpcdn.com/bphoto/${
-              this.state.photo1
-            }/120s.jpg`}
-          />{" "}
-          <span className="rightsb_matchBiz">{this.state.matchBiz1.name}</span>
-        </span>{" "}
-        <p className="rightsb_review_count">
-          {" "}
-          {this.state.matchBiz1.stars} stars {this.state.matchBiz1.review_count}{" "}
-          reviews
-        </p>
-        <p className="rightsb_tips">{this.state.tip1}</p>
-        <span className="rightsb_suggestedBiz">
-          <img
-            className="rightsb_image_biz"
-            src={`https://s3-media3.fl.yelpcdn.com/bphoto/${
-              this.state.photo2
-            }/120s.jpg`}
-          />{" "}
-          <span className="rightsb_matchBiz">{this.state.matchBiz2.name}</span>
-        </span>
-        <p className="rightsb_review_count">
-          {this.state.matchBiz2.stars} stars {"    "}
-          {this.state.matchBiz2.review_count} reviews
-        </p>
-        <p className="rightsb_tips">{this.state.tip2}</p>
-        <span className="rightsb_suggestedBiz">
-          <img
-            className="rightsb_image_biz"
-            src={`https://s3-media3.fl.yelpcdn.com/bphoto/${
-              this.state.photo3
-            }/120s.jpg`}
-          />{" "}
-          <span className="rightsb_matchBiz">{this.state.matchBiz3.name}</span>
-        </span>
-        <p className="rightsb_review_count">
-          {" "}
-          {this.state.matchBiz3.stars} stars {"  "}
-          {this.state.matchBiz3.review_count} reviews
-        </p>
-        <p className="rightsb_tips">{this.state.tip3}</p>
-        <h2 className="rightsb_subheader">Other Places Nearby</h2>
-        <p className="rightsb_listitem">
-          Find more Places Near {this.state.business[0].name}
-        </p>
-        <p className="rightsb_listitem">
-          Find more Burgers Near {this.state.business[0].name}
-        </p>
-        <p className="rightsb_listitem">
-          Find more Sandwiches Near {this.state.business[0].name}
-        </p>
-        <h2 className="rightsb_subheader">Browse Nearby</h2>
-        <p className="rightsb_listitem">
-          {" "}
-          <span>
-            <img className="image" src={"https://i.imgur.com/YVTtcKY.png"} />
-            {"  "}
-          </span>Restaurants
-        </p>
-        <p className="rightsb_listitem">
-          {" "}
-          <span>
-            <img className="image" src={"https://i.imgur.com/f3RdwOP.png"} />
-            {"  "}
-          </span>Nightlife
-        </p>
-        <p className="rightsb_listitem">
-          {" "}
-          <span>
-            <img className="image" src={"https://i.imgur.com/2sYyjqj.jpg"} />
-            {"  "}
-          </span>Shopping
-        </p>
-        <p className="rightsb_listitem">
-          <span>
-            <img className="image" src={"https://i.imgur.com/aAnrFk2.png"} />
-            {"  "}
-          </span>Show All
-        </p>
-        <h2 className="rightsb_subheader">
-          Dining in {this.state.business[0].city}
-        </h2>
-        <p className="rightsb_listitem">
-          <span>
-            <img className="image" src={"https://i.imgur.com/rAokCAc.jpg"} />
-            {"  "}
-            {"  "}
-          </span>Search for Reservations
-        </p>
-        <p className="rightsb_listitem">
-          <span>
-            <img className="image" src={"https://i.imgur.com/gc2EsDX.png"} />
-            {"  "}
-          </span>Book a table in {this.state.business[0].city}
-        </p>
-        <h2 className="rightsb_subheader">
-          Best of {this.state.business[0].city}
-        </h2>
-        <p className="rightsb_listitem">
-          Things to do in {this.state.business[0].city}
-        </p>
-        <h2 className="rightsb_subheader">
-          People found {this.state.business[0].name} by searching for...
-        </h2>
-        <p className="rightsb_listitem">Food {this.state.business[0].city}</p>
-        <h2 className="rightsb_subheader">Near Me</h2>
-        <p className="rightsb_listitem">Dinner</p>
-        <p className="rightsb_listitem">Lunch</p>
-        <p className="rightsb_listitem">Breakfast</p>
+        <div className="rightsb_relatedBusinesses">
+          <h2 className="rightsb_subheader">People Also Viewed</h2>
+          <ul className="rightsb_list">
+            <li className="rightsb_business-list">
+              <div className="rightsb_media-block">
+                <div className="rightsb_media-avatar">
+                  <div className="rightsb_image_box">
+                    <img
+                      className="rightsb_image_biz"
+                      src={`https://s3-media3.fl.yelpcdn.com/bphoto/${
+                        this.state.photo1
+                      }/120s.jpg`}
+                    />
+                  </div>
+                </div>
+                <div className="rightsb_media-story">
+                  <div className="rightsb_media-title">
+                    {this.state.matchBiz1.name}
+                  </div>
+                  <div className="rightsb_bizrating">
+                    <div className="rightsb_star-rating">
+                      {this.state.matchBiz1.stars} STARS
+                    </div>
+                    <span className="rightsb_review-count">
+                      {this.state.matchBiz1.review_count} reviews
+                    </span>
+                  </div>
+                  <q className="rightsb_tips">{this.state.tip1}</q>
+                </div>
+              </div>
+            </li>
+            <li className="rightsb_business-list">
+              <div className="rightsb_media-block">
+                <div className="rightsb_media-avatar">
+                  <div className="rightsb_image_box">
+                    <img
+                      className="rightsb_image_biz"
+                      src={`https://s3-media3.fl.yelpcdn.com/bphoto/${
+                        this.state.photo2
+                      }/120s.jpg`}
+                    />
+                  </div>
+                </div>
+                <div className="rightsb_media-story">
+                  <div className="rightsb_media-title">
+                    {this.state.matchBiz2.name}
+                  </div>
+                  <div className="rightsb_bizrating">
+                    <div className="rightsb_star-rating">
+                      {this.state.matchBiz2.stars} STARS
+                    </div>
+                    <span className="rightsb_review-count">
+                      {this.state.matchBiz2.review_count} reviews
+                    </span>
+                  </div>
+                  <q className="rightsb_tips">{this.state.tip2}</q>
+                </div>
+              </div>
+            </li>
+            <li className="rightsb_business-list">
+              <div className="rightsb_media-block">
+                <div className="rightsb_media-avatar">
+                  <div className="rightsb_image_box">
+                    <img
+                      className="rightsb_image_biz"
+                      src={`https://s3-media3.fl.yelpcdn.com/bphoto/${
+                        this.state.photo3
+                      }/120s.jpg`}
+                    />
+                  </div>
+                </div>
+                <div className="rightsb_media-story">
+                  <div className="rightsb_media-title">
+                    {this.state.matchBiz3.name}
+                  </div>
+                  <div className="rightsb_bizrating">
+                    <div className="rightsb_star-rating">
+                      {this.state.matchBiz3.stars} STARS
+                    </div>
+                    <span className="rightsb_review-count">
+                      {this.state.matchBiz3.review_count} reviews
+                    </span>
+                  </div>
+                  <q className="rightsb_tips">{this.state.tip3}</q>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div className="rightsb_other-places-nearby">
+            <h3 className="rightsb_subheader">Other Places Nearby</h3>
+            <ul className="rightsb_list">
+              <li className="rightsb_other-list-item">
+                <a className="rightsb_other-list-item-arrange">
+                  Find more Places Near {this.state.business[0].name}
+                </a>
+              </li>
+              <li className="rightsb_other-list-item">
+                <a className="rightsb_other-list-item-arrange">
+                  Find more Lunch Near {this.state.business[0].name}
+                </a>
+              </li>
+              <li className="rightsb_other-list-item">
+                <a className="rightsb_other-list-item-arrange">
+                  Find more Dinner Near {this.state.business[0].name}
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div className="rightsb_browse-nearby">
+            <h3 className="rightsb_subheader">Browse Nearby</h3>
+            <ul className="rightsb_list">
+              <li>
+                <a>
+                  <span className="rightsb_static-icon">
+                    <img
+                      className="rightsb_icon"
+                      src={"https://i.imgur.com/YVTtcKY.png/120.jpg"}
+                    />
+                    {"  "}
+                  </span>
+                  <span>Restaurants</span>
+                </a>
+              </li>
+              <li>
+                {" "}
+                <a>
+                  <span className="rightsb_static-icon">
+                    <img
+                      className="rightsb_icon"
+                      src={"https://i.imgur.com/f3RdwOP.png/120.jpg"}
+                    />
+                    {"  "}
+                  </span>
+                  <span>Nightlife</span>
+                </a>
+              </li>
+              <li>
+                <a>
+                  <span className="rightsb_static-icon">
+                    <img
+                      className="rightsb_icon"
+                      src={"https://i.imgur.com/2sYyjqj.jpg/120.jpg"}
+                    />
+                    {"  "}
+                  </span>
+                  <span>Shopping</span>
+                </a>
+              </li>
+              <li>
+                <a>
+                  <span className="rightsb_static-icon">
+                    <img
+                      className="rightsb_icon"
+                      src={"https://i.imgur.com/aAnrFk2.png/120.jpg"}
+                    />
+                    {"  "}
+                  </span>
+                  <span>Show All</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="rightsb_subheader">
+              Dining in {this.state.business[0].city}
+            </h3>
+            <ul className="rightsb_list">
+              <li>
+                <a>
+                  <span className="rightsb_static-icon">
+                    <img
+                      className="rightsb_icon"
+                      src={"https://i.imgur.com/rAokCAc.jpg/120.jpg"}
+                    />
+                    {"  "}
+                  </span>
+                  <span>Search for Reservations</span>
+                </a>
+              </li>
+              <li>
+                <a>
+                  <span className="rightsb_static-icon">
+                    <img
+                      className="rightsb_icon"
+                      src={"https://i.imgur.com/gc2EsDX.png/120.jpg"}
+                    />
+                    {"  "}
+                  </span>
+                  <span>Book a table in {this.state.business[0].city}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <h2 className="rightsb_subheader">
+            Best of {this.state.business[0].city}
+          </h2>
+          <p className="rightsb_listitem">
+            Things to do in {this.state.business[0].city}
+          </p>
+          <h2 className="rightsb_subheader">
+            People found {this.state.business[0].name} by searching for...
+          </h2>
+          <p className="rightsb_listitem">Food {this.state.business[0].city}</p>
+          <h2 className="rightsb_subheader">Near Me</h2>
+          <p className="rightsb_listitem">Dinner</p>
+          <p className="rightsb_listitem">Lunch</p>
+          <p className="rightsb_listitem">Breakfast</p>
+        </div>
       </div>
     );
   }

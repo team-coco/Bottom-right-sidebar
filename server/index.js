@@ -60,6 +60,6 @@ app.get("/:id", (req, res) => {
   res.sendFile(path.join(__dirname + "/../client/dist/index.html"));
 });
 
-app.listen(3002, function() {
+app.listen(3010, function() {
   console.log("Listening on 3002!");
 });
