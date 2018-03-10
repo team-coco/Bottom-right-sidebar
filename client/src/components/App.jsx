@@ -236,7 +236,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="page">
+      <div className="rightsb_page">
         <div className="rightsb_relatedBusinesses">
           <h2 className="rightsb_subheader">People Also Viewed</h2>
           <ul className="rightsb_list">

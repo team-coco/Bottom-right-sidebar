@@ -1,3 +1,7 @@
+.rightsb_page {
+  width: 50%;
+}
+
 .rightsb_subheader {
   font-family: Helvetica Neue;
   color: rgb(211, 35, 35);
@@ -71,6 +75,7 @@
   font-size: 15px;
   quotes: none;
   font-style: italic;
+  word-wrap: normal|break-word|initial|inherit;
 }
 
 .rightsb_other-list-item-arrange {
