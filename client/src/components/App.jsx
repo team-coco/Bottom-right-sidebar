@@ -61,9 +61,9 @@ class App extends React.Component {
         this.fetchTips(biz1.id);
         this.fetchTips(biz2.id);
         this.fetchTips(biz3.id);
-        this.fetchPhotos(biz1.id);
-        this.fetchPhotos(biz1.id);
-        this.fetchPhotos(biz1.id);
+        this.fetchPhotos(this.state.matchBiz1.id);
+        this.fetchPhotos(this.state.matchBiz2.id);
+        this.fetchPhotos(this.state.matchBiz3.id);
       })
       .catch(err => {
         console.log(err, "error fetch postalCode axios");
