@@ -1,0 +1,14 @@
+config:
+  target: "http://localhost:3010/sidebar/business"
+  phases:
+    - duration: 60
+      arrivalRate: 400
+  payload:
+    path: "businessIds_load_testing.csv"
+    fields:
+      - "id"
+scenarios:
+  - name: "Business"
+    flow:
+      - get:
+          url: "/{{ id }}"
