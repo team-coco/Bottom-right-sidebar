@@ -1,0 +1,10 @@
+config:
+  target: "http://localhost:3010"
+  phases:
+    - duration: 20
+      arrivalRate: 400
+scenarios:
+  - name: "Business"
+    flow:
+      - get:
+          url: "/"

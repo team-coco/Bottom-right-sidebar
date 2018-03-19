@@ -2,13 +2,15 @@ config:
   target: "http://localhost:3010/sidebar/postalCode"
   phases:
     - duration: 20
-      arrivalRate: 3
+      arrivalRate: 5
   payload:
     path: "postal_codes_50000.csv"
     fields:
       - "id"
 scenarios:
-  - name: "Business"
+  - name: "Postal Code"
     flow:
-      - get:
-          url: "/{{ id }}"
+      - loop:
+        - get:
+            url: "/{{ id }}"
+        count: 40
