@@ -22,7 +22,8 @@ CREATE TABLE `photo` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
+CREATE INDEX photo_id_idx ON photo(photo_id);
+CREATE INDEX business_id_idx ON photo(business_id);
 
 --
 -- Table structure for table `tip`
@@ -33,7 +34,7 @@ DROP TABLE IF EXISTS `tip`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tip` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` varchar(22) NOT NULL,
+  `tip_id` varchar(22) NOT NULL,
   `business_id` varchar(22) NOT NULL,
   `text` mediumtext,
   `date` datetime DEFAULT NULL,
@@ -41,6 +42,7 @@ CREATE TABLE `tip` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1098326 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
+CREATE INDEX tip_id_idx ON tip(tip_id);
+CREATE INDEX business_id_idx ON tip(business_id);
 
 GRANT ALL PRIVILEGES ON chompy_tips_photos.* TO 'chompy';
