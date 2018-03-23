@@ -35,6 +35,7 @@ CREATE TABLE `business`
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */
 
+
 LOAD DATA
   LOCAL INFILE '/home/ec2-user/business.csv'
   INTO TABLE chompy.business
@@ -114,7 +115,6 @@ LOAD DATA
 
 CREATE INDEX tip_id_idx ON tip(tip_id);
 CREATE INDEX business_id_idx ON tip(business_id);
-
 
 DROP TABLE IF EXISTS `business_reviews200`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

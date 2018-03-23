@@ -5,26 +5,30 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./server/index.js",
+    "start:aws": "DATABASE_HOST=54.193.92.154 PORT=3010 node ./server/index.js",
+    "start:cluster": "DATABASE_HOST=54.193.92.154 PORT=3010 node ./server/index.js & DATABASE_HOST=54.193.92.154 PORT=3011 node ./server/index.js & DATABASE_HOST=54.193.92.154 PORT=3012 node ./server/index.js &",
     "react-dev": "webpack -d --watch",
     "test": "jest",
     "docker": "node ./server/index.js && webpack -d"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/codenamesgroup/Bottom-right-sidebar.git"
+    "url": "git+https://github.com/rafaelhernandez/Bottom-right-sidebar.git"
   },
-  "author": "carlton",
+  "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/codenamesgroup/Bottom-right-sidebar/issues"
+    "url": "https://github.com/rafaelhernandez/Bottom-right-sidebar/issues"
   },
-  "homepage": "https://github.com/codenamesgroup/Bottom-right-sidebar#readme",
+  "homepage": "https://github.com/rafaelhernandez/Bottom-right-sidebar#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "bluebird": "^3.5.1",
     "css-loader": "^0.28.10",
     "has-flag": "^3.0.0",
     "mysql": "^2.15.0",
     "nodemon": "^1.17.1",
+    "promise-mysql": "^3.2.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-image": "^1.3.1",
@@ -35,7 +39,6 @@
     "babel-eslint": "^8.2.2",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
-    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "eslint": "^4.18.1",
     "eslint-config-airbnb": "^16.1.0",

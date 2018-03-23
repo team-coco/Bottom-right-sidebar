@@ -17,9 +17,6 @@ class App extends React.Component {
       photo1: null,
       photo2: null,
       photo3: null,
-      image1: [{}],
-      image2: [{}],
-      image3: [{}],
       starRating1: null,
       starRating2: null,
       starRating3: null
@@ -40,69 +37,41 @@ class App extends React.Component {
         var postalCode = this.state.business[0].postal_code;
         var bizId = this.state.business[0].id;
         this.setState({ postalCode: postalCode });
-        this.fetchBusinessIds(postalCode);
+        this.fetchSuggestedBusiness(postalCode);
       })
       .catch(err => {
         console.log(err, "this is the error in the componentDidMount");
       });
   }
 
-  fetchBusinessIds(postalCode) {
+  fetchSuggestedBusiness(postalCode) {
     axios
       .get("/sidebar/postalCode/" + postalCode)
       .then(response => {
         var biz1 = response.data[1];
         var biz2 = response.data[2];
         var biz3 = response.data[3];
-        this.setState({ matchBiz1: biz1, matchBiz2: biz2, matchBiz3: biz3 });
+        this.setState({ 
+          matchBiz1: biz1, 
+          matchBiz2: biz2, 
+          matchBiz3: biz3,
+          tip1: biz1.tip_text,
+          tip2: biz2.tip_text,
+          tip3: biz3.tip_text,
+          photo1: biz1.encoded_photo,
+          photo2: biz2.encoded_photo,
+          photo3: biz2.encoded_photo,
+         });
         this.setStars(biz1.stars);
         this.setStars(biz2.stars);
         this.setStars(biz3.stars);
-        this.fetchTips(this.state.matchBiz1.id);
-        this.fetchTips(biz2.id);
-        this.fetchTips(biz3.id);
-        this.fetchPhotos(this.state.matchBiz1.id);
-        this.fetchPhotos(this.state.matchBiz2.id);
-        this.fetchPhotos(this.state.matchBiz3.id);
       })
       .catch(err => {
         console.log(err, "error fetch postalCode axios");
       });
   }
 
-  fetchPhotos(bizId) {
-    axios
-      .get("/sidebar/photos/" + bizId)
-      .then(response => {
-        if (this.state.photo1 === null) {
-          this.setState({ photo1: response.data[0].id });
-        } else if (this.state.photo2 === null) {
-          this.setState({ photo2: response.data[0].id });
-        } else if (this.state.photo3 === null) {
-          this.setState({ photo3: response.data[0].id });
-        }
-      })
-      .catch(error => {
-        console.log(error, "error fetchphotos axios");
-      });
-  }
-
-  fetchTips(bizId) {
-    axios
-      .get("/sidebar/businessTips/" + bizId)
-      .then(response => {
-        if (this.state.tip1 === null) {
-          this.setState({ tip1: response.data[0].text });
-        } else if (this.state.tip2 === null) {
-          this.setState({ tip2: response.data[0].text });
-        } else if (this.state.tip3 === null) {
-          this.setState({ tip3: response.data[0].text });
-        }
-      })
-      .catch(error => {
-        console.log(error, "error from fetchTips axios react");
-      });
-  }
+ 
 
   setStars(stars) {
     if (stars === 1) {
@@ -246,9 +215,9 @@ class App extends React.Component {
                   <div className="rightsb_image_box">
                     <img
                       className="rightsb_image_biz"
-                      src={`https://s3-media3.fl.yelpcdn.com/bphoto/${
+                      src={`data:image/jpeg;base64, ${
                         this.state.photo1
-                      }/120s.jpg`}
+                      }`}
                     />
                   </div>
                 </div>
@@ -277,9 +246,9 @@ class App extends React.Component {
                   <div className="rightsb_image_box">
                     <img
                       className="rightsb_image_biz"
-                      src={`https://s3-media3.fl.yelpcdn.com/bphoto/${
+                      src={`data:image/jpeg;base64, ${
                         this.state.photo2
-                      }/120s.jpg`}
+                      }`}
                     />
                   </div>
                 </div>
@@ -308,9 +277,9 @@ class App extends React.Component {
                   <div className="rightsb_image_box">
                     <img
                       className="rightsb_image_biz"
-                      src={`https://s3-media3.fl.yelpcdn.com/bphoto/${
+                      src={`data:image/jpeg;base64, ${
                         this.state.photo3
-                      }/120s.jpg`}
+                      }`}
                     />
                   </div>
                 </div>

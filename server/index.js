@@ -1,65 +1,70 @@
-const express = require("express");
+const express = require('express');
+const mysql = require('mysql');
+const path = require('path');
+
 const app = express();
-const mysql = require("mysql");
-const path = require("path");
 
-app.use(express.static("./client/dist/"));
+app.use(express.static('./client/dist/'));
+const port = process.env.PORT || 3010;
+const databaseHost = process.env.DATABASE_HOST || 'localhost';
+const databasePort = process.env.DATABASE_PORT || 3306;
 
-const connection = mysql.createConnection({
-  host: "chompy-test-database.cr8yw4uwndba.us-west-1.rds.amazonaws.com",
-  user: "root",
-  database: "chompyremote",
-  password: "chompydatabase"
-});
+var pool = mysql.createPool({
+  connectionLimit: 140,
+  host: databaseHost,
+  port: databasePort,
+  user: 'chompy',
+  database: 'chompy',
+  password: 'Chompy4&!database',
+  debug: false
+}); 
 
-connection.connect(function(err) {
-  if (err) {
-    console.log("mySQL ERROR");
-  } else {
-    console.log("mySQL CONNECTED");
-  }
-});
-
-app.get("/sidebar/business/:id", function(req, res) {
-  var id = req.params.id;
-  let q = `SELECT * FROM business WHERE id = "${id}"`;
-  connection.query(q, function(err, rows, fields) {
-    if (err) throw err;
-    res.status(201).send(rows);
+var executeQuery = function (query, res) {
+  pool.getConnection(function (err, connection) {
+    if (err) {
+      console.log('Error: ', err);
+      res.sendStatus(500);
+    }
+    connection.query(query, function (err, rows) {
+      connection.release();
+      if (err) {
+        console.log('Error: ', err);
+        res.sendStatus(500);
+      }
+      res.send(rows);
+    });
   });
+};
+
+app.get('/sidebar/business/:id', function(req, res) {
+  var id = req.params.id;
+  let q = `SELECT * FROM business WHERE id = '${id}'`;
+  executeQuery(q, res);
 });
 
-app.get("/sidebar/postalCode/:code", function(req, res) {
+app.get('/sidebar/postalCode/:code', function(req, res) {
   var postalCode = req.params.code;
-  let q = `SELECT * FROM business WHERE postal_code="${postalCode}" AND review_count > 200 LIMIT 4`;
-  connection.query(q, function(err, rows, fields) {
-    if (err) throw err;
-    res.status(201).send(rows);
-  });
+  // let q = `SELECT * FROM business WHERE postal_code='${postalCode}' AND review_count > 200 LIMIT 4`;
+  let q = `SELECT * FROM business_reviews200 WHERE postal_code='${postalCode}' LIMIT 4`;
+  executeQuery(q, res);
 });
 
-app.get("/sidebar/businessTips/:id", function(req, res) {
+app.get('/sidebar/businessTips/:id', function(req, res) {
   var id = req.params.id;
-  let q = `SELECT * FROM tip WHERE business_id="${id}" LIMIT 1`;
-  connection.query(q, function(err, rows, fields) {
-    if (err) throw err;
-    res.status(201).send(rows);
-  });
+  let q = `SELECT * FROM tip WHERE business_id='${id}' LIMIT 1`;
+  executeQuery(q, res);
 });
 
-app.get("/sidebar/photos/:id", function(req, res) {
+app.get('/sidebar/photos/:id', function(req, res) {
   var id = req.params.id;
-  let q = `SELECT * FROM photo WHERE business_id="${id}" LIMIT 1`;
-  connection.query(q, function(err, rows, fields) {
-    if (err) throw error;
-    res.status(201).send(rows);
-  });
+  let q = `SELECT photo_id as id, business_id, caption, label FROM photo WHERE business_id='${id}' LIMIT 1`;
+  executeQuery(q, res);
 });
 
-app.get("/:id", (req, res) => {
-  res.sendFile(path.join(__dirname + "/../client/dist/index.html"));
+app.get('/:id', (req, res) => {
+  res.sendFile(path.join(__dirname + '/../client/dist/index.html'));
 });
 
-app.listen(3010, function() {
-  console.log("Listening on 3002!");
+app.listen(port, function() {
+  console.log(`Listening on port ${port}`);
 });
