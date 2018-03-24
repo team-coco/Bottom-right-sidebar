@@ -14,15 +14,15 @@ class App extends React.Component {
         matchBiz1: props.initialState.business1,
         matchBiz2: props.initialState.business2,
         matchBiz3: props.initialState.business3,
-        tip1: props.initialState.business1.tip_text,
-        tip2: props.initialState.business2.tip_text,
-        tip3: props.initialState.business3.tip_text,
-        photo1: props.initialState.business1.encoded_photo,
-        photo2: props.initialState.business2.encoded_photo,
-        photo3: props.initialState.business3.encoded_photo,
-        starRating1: this.getStars(props.initialState.business1.stars),
-        starRating2: this.getStars(props.initialState.business2.stars),
-        starRating3: this.getStars(props.initialState.business3.stars)
+        tip1: props.initialState.business1 && props.initialState.business1.tip_text,
+        tip2: props.initialState.business2 && props.initialState.business2.tip_text,
+        tip3: props.initialState.business3 && props.initialState.business3.tip_text,
+        photo1: props.initialState.business1 && props.initialState.business1.encoded_photo,
+        photo2: props.initialState.business2 && props.initialState.business2.encoded_photo,
+        photo3: props.initialState.business3 && props.initialState.business3.encoded_photo,
+        starRating1: props.initialState.business1 && this.getStars(props.initialState.business1.stars),
+        starRating2: props.initialState.business2 && this.getStars(props.initialState.business2.stars),
+        starRating3: props.initialState.business3 && this.getStars(props.initialState.business3.stars)
       };
     } else {
       this.state = {
@@ -74,15 +74,15 @@ class App extends React.Component {
           matchBiz1: biz1, 
           matchBiz2: biz2, 
           matchBiz3: biz3,
-          tip1: biz1.tip_text,
-          tip2: biz2.tip_text,
-          tip3: biz3.tip_text,
-          photo1: biz1.encoded_photo,
-          photo2: biz2.encoded_photo,
-          photo3: biz3.encoded_photo,
-          starRating1: this.getStars(biz1.stars),
-          starRating2: this.getStars(biz2.stars),
-          starRating3: this.getStars(biz3.stars)
+          tip1: biz1 && biz1.tip_text,
+          tip2: biz2 && biz2.tip_text,
+          tip3: biz3 && biz3.tip_text,
+          photo1: biz1 && biz1.encoded_photo,
+          photo2: biz2 && biz2.encoded_photo,
+          photo3: biz3 && biz3.encoded_photo,
+          starRating1: biz1 && this.getStars(biz1.stars),
+          starRating2: biz2 && this.getStars(biz2.stars),
+          starRating3: biz3 && this.getStars(biz3.stars)
          });
       })
       .catch(err => {
@@ -111,7 +111,7 @@ class App extends React.Component {
       return 'https://i.imgur.com/327Fh6y.png';
     }
   }
-  
+
   render() {
     return (
       <div className="rightsb_page">
@@ -132,7 +132,7 @@ class App extends React.Component {
                 </div>
                 <div className="rightsb_media-story">
                   <div className="rightsb_media-title">
-                    {this.state.matchBiz1.name}
+                    {this.state.matchBiz1 && this.state.matchBiz1.name}
                   </div>
                   <div className="rightsb_bizrating">
                     <div className="rightsb_star-rating">
@@ -142,7 +142,7 @@ class App extends React.Component {
                       />
                     </div>
                     <span className="rightsb_review-count">
-                      {this.state.matchBiz1.review_count} reviews
+                      {this.state.matchBiz1 ? this.state.matchBiz1.review_count : 0} reviews
                     </span>
                   </div>
                   <q className="rightsb_tips">{this.state.tip1}</q>
@@ -163,7 +163,7 @@ class App extends React.Component {
                 </div>
                 <div className="rightsb_media-story">
                   <div className="rightsb_media-title">
-                    {this.state.matchBiz2.name}
+                    {this.state.matchBiz2 && this.state.matchBiz2.name}
                   </div>
                   <div className="rightsb_bizrating">
                     <div className="rightsb_star-rating">
@@ -173,7 +173,7 @@ class App extends React.Component {
                       />
                     </div>
                     <span className="rightsb_review-count">
-                      {this.state.matchBiz2.review_count} reviews
+                      {this.state.matchBiz2 ? this.state.matchBiz2.review_count : 0} reviews
                     </span>
                   </div>
                   <q className="rightsb_tips">{this.state.tip2}</q>
@@ -194,7 +194,7 @@ class App extends React.Component {
                 </div>
                 <div className="rightsb_media-story">
                   <div className="rightsb_media-title">
-                    {this.state.matchBiz3.name}
+                    {this.state.matchBiz3 && this.state.matchBiz3.name}
                   </div>
                   <div className="rightsb_bizrating">
                     <div className="rightsb_star-rating">
@@ -204,7 +204,7 @@ class App extends React.Component {
                       />
                     </div>
                     <span className="rightsb_review-count">
-                      {this.state.matchBiz3.review_count} reviews
+                      {this.state.matchBiz3 ? this.state.matchBiz3.review_count : 0} reviews
                     </span>
                   </div>
                   <q className="rightsb_tips">{this.state.tip3}</q>
