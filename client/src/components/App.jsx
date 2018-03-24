@@ -20,9 +20,9 @@ class App extends React.Component {
         photo1: props.initialState.business1.encoded_photo,
         photo2: props.initialState.business2.encoded_photo,
         photo3: props.initialState.business3.encoded_photo,
-        starRating1: props.initialState.business1.stars,
-        starRating2: props.initialState.business2.stars,
-        starRating3: props.initialState.business3.stars
+        starRating1: this.getStars(props.initialState.business1.stars),
+        starRating2: this.getStars(props.initialState.business2.stars),
+        starRating3: this.getStars(props.initialState.business3.stars)
       };
     } else {
       this.state = {
@@ -45,21 +45,22 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.initialState && !this.props.initialState.loaded)
-    axios
-      .get(`/api/sidebar/business/${this.id}`)
-      .then(response => {
-        this.setState({ business: response.data });
-      })
-      .then(() => {
-        var postalCode = this.state.business[0].postal_code;
-        var bizId = this.state.business[0].id;
-        this.setState({ postalCode: postalCode });
-        this.fetchSuggestedBusiness(postalCode);
-      })
-      .catch(err => {
-        console.log(err, "this is the error in the componentDidMount");
-      });
+    if (!this.props.initialState || !this.props.initialState.loaded) {
+      axios
+        .get(`/api/sidebar/business/${this.id}`)
+        .then(response => {
+          this.setState({ business: response.data });
+        })
+        .then(() => {
+          var postalCode = this.state.business[0].postal_code;
+          var bizId = this.state.business[0].id;
+          this.setState({ postalCode: postalCode });
+          this.fetchSuggestedBusiness(postalCode);
+        })
+        .catch(err => {
+          console.log(err, "this is the error in the componentDidMount");
+        });
+    }
   }
 
   fetchSuggestedBusiness(postalCode) {
@@ -79,148 +80,38 @@ class App extends React.Component {
           photo1: biz1.encoded_photo,
           photo2: biz2.encoded_photo,
           photo3: biz3.encoded_photo,
+          starRating1: this.getStars(biz1.stars),
+          starRating2: this.getStars(biz2.stars),
+          starRating3: this.getStars(biz3.stars)
          });
-        this.setStars(biz1.stars);
-        this.setStars(biz2.stars);
-        this.setStars(biz3.stars);
       })
       .catch(err => {
         console.log(err, "error fetch postalCode axios");
       });
   }
 
- 
-
-  setStars(stars) {
+  getStars(stars) {
     if (stars === 1) {
-      if (this.state.starRating1 === null) {
-        this.setState({
-          starRating1: "https://i.imgur.com/joRV605.png"
-        });
-      } else if (this.state.starRating2 === null) {
-        this.setState({
-          starRating2: "https://i.imgur.com/joRV605.png"
-        });
-      } else if (this.state.starRating3 === null) {
-        this.setState({
-          starRating3: "https://i.imgur.com/joRV605.png"
-        });
-      }
+      return 'https://i.imgur.com/joRV605.png';
     } else if (stars === 1.5) {
-      if (this.state.starRating1 === null) {
-        this.setState({
-          starRating1: "https://i.imgur.com/fqHSmyz.png"
-        });
-      } else if (this.state.starRating2 === null) {
-        this.setState({
-          starRating2: "https://i.imgur.com/fqHSmyz.png"
-        });
-      } else if (this.state.starRating3 === null) {
-        this.setState({
-          starRating3: "https://i.imgur.com/fqHSmyz.png"
-        });
-      }
+      return 'https://i.imgur.com/fqHSmyz.png';
     } else if (stars === 2) {
-      if (this.state.starRating1 === null) {
-        this.setState({
-          starRating1: "https://i.imgur.com/GsBh9O5.png"
-        });
-      } else if (this.state.starRating2 === null) {
-        this.setState({
-          starRating2: "https://i.imgur.com/GsBh9O5.png"
-        });
-      } else if (this.state.starRating3 === null) {
-        this.setState({
-          starRating3: "https://i.imgur.com/GsBh9O5.png"
-        });
-      }
+      return 'https://i.imgur.com/GsBh9O5.png';
     } else if (stars === 2.5) {
-      if (this.state.starRating1 === null) {
-        this.setState({
-          starRating1: "https://i.imgur.com/HHk4ca7.png"
-        });
-      } else if (this.state.starRating2 === null) {
-        this.setState({
-          starRating2: "https://i.imgur.com/HHk4ca7.png"
-        });
-      } else if (this.state.starRating3 === null) {
-        this.setState({
-          starRating3: "https://i.imgur.com/HHk4ca7.png"
-        });
-      }
+      return 'https://i.imgur.com/HHk4ca7.png';
     } else if (stars === 3) {
-      if (this.state.starRating1 === null) {
-        this.setState({
-          starRating1: "https://i.imgur.com/eXa2t1X.png"
-        });
-      } else if (this.state.starRating2 === null) {
-        this.setState({
-          starRating2: "https://i.imgur.com/eXa2t1X.png"
-        });
-      } else if (this.state.starRating3 === null) {
-        this.setState({
-          starRating3: "https://i.imgur.com/eXa2t1X.png"
-        });
-      }
+      return 'https://i.imgur.com/eXa2t1X.png';
     } else if (stars === 3.5) {
-      if (this.state.starRating1 === null) {
-        this.setState({
-          starRating1: "https://i.imgur.com/nDcH9au.png"
-        });
-      } else if (this.state.starRating2 === null) {
-        this.setState({
-          starRating2: "https://i.imgur.com/nDcH9au.png"
-        });
-      } else if (this.state.starRating3 === null) {
-        this.setState({
-          starRating3: "https://i.imgur.com/nDcH9au.png"
-        });
-      }
+      return 'https://i.imgur.com/nDcH9au.png';
     } else if (stars === 4) {
-      if (this.state.starRating1 === null) {
-        this.setState({
-          starRating1: "https://i.imgur.com/v2Ep8kQ.png"
-        });
-      } else if (this.state.starRating2 === null) {
-        this.setState({
-          starRating2: "https://i.imgur.com/v2Ep8kQ.png"
-        });
-      } else if (this.state.starRating3 === null) {
-        this.setState({
-          starRating3: "https://i.imgur.com/v2Ep8kQ.png"
-        });
-      }
+      return 'https://i.imgur.com/v2Ep8kQ.png';
     } else if (stars === 4.5) {
-      if (this.state.starRating1 === null) {
-        this.setState({
-          starRating1: "https://i.imgur.com/e2b0NN4.png"
-        });
-      } else if (this.state.starRating2 === null) {
-        this.setState({
-          starRating2: "https://i.imgur.com/e2b0NN4.png"
-        });
-      } else if (this.state.starRating3 === null) {
-        this.setState({
-          starRating3: "https://i.imgur.com/e2b0NN4.png"
-        });
-      }
+      return 'https://i.imgur.com/e2b0NN4.png';
     } else if (stars === 5) {
-      if (this.state.starRating1 === null) {
-        this.setState({
-          starRating1: "https://i.imgur.com/327Fh6y.png"
-        });
-      } else if (this.state.starRating2 === null) {
-        this.setState({
-          starRating2: "https://i.imgur.com/327Fh6y.png"
-        });
-      } else if (this.state.starRating3 === null) {
-        this.setState({
-          starRating3: "https://i.imgur.com/327Fh6y.png"
-        });
-      }
+      return 'https://i.imgur.com/327Fh6y.png';
     }
   }
-
+  
   render() {
     return (
       <div className="rightsb_page">
