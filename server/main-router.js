@@ -1,49 +1,42 @@
 const express = require('express');
 const path = require('path');
-
-import React from 'react';
-import { renderToString } from 'react-dom/server';
-import RightBottomSidebar from '../client/src/components/App.jsx';
+const redis = require('./redis.js');
+const ssr = require('./ssr.js');
 const Html = require('./Html');
-const executeQuery = require('./connectionPool.js');
-
 const router = express.Router();
 
 router.route('/ssr/:id')
   .get((req, res, next) => {
-    let iniState = {};
-    let id = req.params.id;
-    let q = `SELECT * FROM business WHERE id = '${id}'`;
-    executeQuery(q)
-    .then(row => {
-      iniState.business = row;
-      q = `SELECT * FROM business_reviews200 WHERE postal_code='${row[0].postal_code}' LIMIT 4`;
-      return executeQuery(q);
-    })
-    .then(rows => {
-      iniState.business1 = rows[1];
-      iniState.business2 = rows[2];
-      iniState.business3 = rows[3];
-      iniState.loaded = true;
-      const body = renderToString(<RightBottomSidebar businessId={id} initialState={iniState}/>);
-      res.send(
-        Html({
-          body: body,
-          initialState: JSON.stringify(iniState)
-        })
-      );
-    })
-    .catch(err => {
-      console.log('Error ', err);
-      res.sendStatus(404);
-    });
+    ssr.send('SSR_' + req.params.id.toString(), req.params.id, Html); 
   })
   .options((req, res) => {
     res.sendStatus(200);
   });
 
 router.route('/:id')
-  .get((req, res, next) => res.sendFile('index.html', { root: path.resolve('public') }))
+  .get((req, res, next) => {
+    redis.get('index.html')
+      .then(data => {
+        if (data) {
+          res.send(data);
+        } else {
+          res.sendFile('index.html', { root: path.resolve('public') });
+          redis.set('index.html', `
+          <!DOCTYPE html>
+            < html >
+            <head>
+              <meta charset="UTF-8">
+                <title>BRSidebar</title>
+            </head>
+              <body>
+                <div id="right_bottom_sidebar"></div>
+                <script src="/app.js" type="text/javascript"></script>
+              </body>
+            </html>`
+          );
+        }
+      });
+  })
   .options((req, res) => {
     res.sendStatus(200);
   });
