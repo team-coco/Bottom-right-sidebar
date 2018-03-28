@@ -16,25 +16,30 @@ const client = new cassandra.Client({
 
 const executeQuery = q => client.execute(q, []);
 
-const executeQueryWithCache = (q, key, req, res, next) => {
-  redis.get(key)
-    .then(data => {
-      if (data) {
-        res.json(data);
-        return;
-      } else {
-        return executeQuery(q);
-      }
-    })
-    .then(rows => {
-      if (rows === undefined) return;
-      res.send(rows);
-      return redis.set(key, JSON.stringify(rows));
-    })
-    .then(() => { })
-    .catch(err => {
-      console.log('Error ', err);
-    });
+const executeQueryWithCache = (q, key) => {
+  if (key) {
+    let needToCache = false;
+    return redis.get(key)
+      .then(data => {
+        if (data) {
+          return JSON.parse(data);
+        } else {
+          needToCache = true;
+          return executeQuery(q);
+        }
+      })
+      .then(rows => {
+        if (needToCache) {
+          Promise.resolve(redis.set(key, JSON.stringify(rows)));
+        }
+        return rows;
+      })
+      .catch(err => {
+        console.log('Error ', err);
+      });
+  } else {
+    return executeQuery(q);
+  }
 };
 
 const isCached = process.env.CACHE || 'redis';
