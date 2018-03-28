@@ -1,6 +1,7 @@
 // const mysql = require('mysql');
+const Promise = require('bluebird');
 const mysql = require('promise-mysql');
-
+const redis = require('./redis.js');
 const databaseHost = process.env.DATABASE_HOST || 'localhost';
 const databasePort = process.env.DATABASE_PORT || 3306;
 
@@ -25,27 +26,35 @@ const executeQuery = q => {
 };
 
 const executeQueryWithCache = (q, key) => {
-  redis.get(key)
+  if (key) {
+    let needToCache = false;
+    return redis.get(key)
     .then(data => {
       if (data) {
-        res.json(data);
-        return;
+        return JSON.parse(data);
       } else {
+        needToCache = true;
         return executeQuery(q);
       }
     })
     .then(rows => {
-      if (rows === undefined) return;
-      res.send(rows);
-      return redis.set(key, JSON.stringify(rows));
+      if (needToCache) {
+        Promise.resolve(redis.set(key, JSON.stringify(rows)));
+      }
+      return rows;
     })
-    .then(() => { })
     .catch(err => {
       console.log('Error ', err);
     });
+  } else {
+    return executeQuery(q);
+  }
 };
 
-module.exports = {
-  executeQuery,
-  executeQueryWithCache
+const isCached = process.env.CACHE || 'redis';
+let query = executeQueryWithCache;
+if (isCached === 'none') {
+  query = executeQuery;
 }
+
+module.exports = query;

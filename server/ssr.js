@@ -3,13 +3,13 @@ import { renderToString } from 'react-dom/server';
 import RightBottomSidebar from '../client/src/components/App.jsx';
 const redis = require('./redis.js');
 
-let executeQuery = require('./mysqlPool.js');
+let query = require('./mysqlPool.js');
 const databaseEngine = process.env.DATABASE_ENGINE || 'mysql';
 if (databaseEngine === 'cassandra') {
-  executeQuery = require('./cassandraPool.js');
+  query = require('./cassandraPool.js');
 }
 
-const send = (key, id, template) => {
+module.exports = function(req, res, next, key, id, template) {
   let iniState = {};
   redis.get(key)
     .then(data => {
@@ -17,7 +17,7 @@ const send = (key, id, template) => {
         res.send(data);
         return;
       } else {
-        return executeQuery(`SELECT * FROM business WHERE id =${id}`);
+        return query(`SELECT * FROM business WHERE id =${id}`);
       }
     })
     .then(row => {
@@ -26,7 +26,7 @@ const send = (key, id, template) => {
         row = row.rows;
       }
       iniState.business = row;
-      return executeQuery(`SELECT * FROM business_reviews200 WHERE postal_code='${row[0].postal_code}' LIMIT 4`);
+      return query(`SELECT * FROM business_reviews200 WHERE postal_code='${row[0].postal_code}' LIMIT 4`);
     })
     .then(rows => {
       if (rows === undefined) return;
@@ -37,7 +37,7 @@ const send = (key, id, template) => {
       iniState.business2 = rows[2];
       iniState.business3 = rows[3];
       iniState.loaded = true;
-      const body = renderToString(<RightBottomSidebar businessId={id} initialState={iniState} />);
+      const body = renderToString(<RightBottomSidebar businessId={id} initialState={JSON.parse(JSON.stringify(iniState))}></RightBottomSidebar>);
       let html = template({
         body: body,
         initialState: JSON.stringify(iniState)
@@ -51,5 +51,3 @@ const send = (key, id, template) => {
       res.sendStatus(404);
     });
 };
-
-module.exports = send;
