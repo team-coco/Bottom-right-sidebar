@@ -13,7 +13,7 @@ const Html = ({ body, initialState }) => `
     </head>
     <body>
       <div id="right_bottom_sidebar">${body}</div>
-      <script src="/app.js" type="text/javascript"></script>
+      <script src="/bundle.js" type="text/javascript"></script>
     </body>
   </html>
 `;

@@ -6,7 +6,12 @@ const router = express.Router();
 
 router.route('/ssr/:id')
   .get((req, res, next) => {
-    ssr(req, res, next, 'SSR_' + req.params.id.toString(), req.params.id, Html); 
+    let id = ParseInt(req.params.id);
+    if (id > 1) {
+      ssr(req, res, next, 'SSR_' + id, id, Html); 
+    } else {
+      res.sendStatus(404);
+    }
   })
   .options((req, res) => {
     res.sendStatus(200);

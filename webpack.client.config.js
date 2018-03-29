@@ -17,7 +17,7 @@ module.exports = {
   entry: path.join(paths.SRC, 'index.jsx'),
   output: {
     path: paths.DIST,
-    filename: 'app.js',
+    filename: 'bundle.js',
   },
   // Tell webpack to use html plugin
   // plugins: [
