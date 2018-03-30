@@ -3,9 +3,16 @@ const HtmlApi = require('./HtmlApi.js');
 const ssr = require('./ssr.js');
 const router = express.Router();
 
-router.route('/ssr/:id')
+let query = require('./mysqlPool.js');
+const databaseEngine = process.env.DATABASE_ENGINE || 'mysql';
+if (databaseEngine === 'cassandra') {
+  query = require('./cassandraPool.js');
+}
+
+router
+  .route('/ssr/:id')
   .get((req, res, next) => {
-    ssr.send('apiSSR_' + id.toString(), req.params.id, HtmlApi); 
+    ssr(req, res, next, 'apiSSR_' + req.params.id.toString(), req.params.id, HtmlApi); 
   })
   .options((req, res) => {
     res.sendStatus(200);
@@ -14,7 +21,11 @@ router.route('/ssr/:id')
 router
 .route('/business/:id')
 .get((req, res, next) => {
-  executeQueryWithCache(`SELECT * FROM business WHERE id =${req.params.id}`, 'apiBusiness_' + req.params.id.toString());
+  query(`SELECT * FROM business WHERE id =${req.params.id}`, 'apiBusiness_' + req.params.id.toString())
+  .then(rows => {
+    res.send(rows);
+  })
+  .catch(err => console.log('Error ', err));
 })
 .options((req, res) => {
   res.sendStatus(200);
@@ -24,7 +35,11 @@ router
   .route('/postalCode/:code')
   .get((req, res, next) => {
     // let q = `SELECT * FROM business WHERE postal_code='${postalCode}' AND review_count > 200 LIMIT 4`;
-    executeQueryWithCache(`SELECT * FROM business_reviews200 WHERE postal_code='${req.params.code}' LIMIT 4`, 'apiPostalCode_' + req.params.code.toString());
+    query(`SELECT * FROM business_reviews200 WHERE postal_code='${req.params.code}' LIMIT 4`, 'apiPostalCode_' + req.params.code.toString(), req, res, next)
+    .then(rows => {
+      res.send(rows);
+    })
+    .catch(err => console.log('Error ', err));
   })
   .options((req, res) => {
     res.sendStatus(200);
@@ -33,7 +48,11 @@ router
 router
   .route('/businessTips/:id')
   .get((req, res, next) => {
-    executeQueryWithCache(`SELECT * FROM tip WHERE business_id=${req.params.id} LIMIT 1`, 'apiTips_' + req.params.id.toString());
+    query(`SELECT * FROM tip WHERE business_id=${req.params.id} LIMIT 1`, 'apiTips_' + req.params.id.toString(), req, res, next)
+    .then(rows => {
+      res.send(rows);
+    })
+    .catch(err => console.log('Error ', err));
   })
   .options((req, res) => {
     res.sendStatus(200);
@@ -42,7 +61,11 @@ router
 router
   .route('/photos/:id')
   .get((req, res, next) => {
-    executeQueryWithCache(`SELECT photo_id as id, business_id, caption, label FROM photo WHERE business_id=${req.params.id} LIMIT 1`, 'apiPhotos_' + req.params.id.toString());
+    query(`SELECT photo_id as id, business_id, caption, label FROM photo WHERE business_id=${req.params.id} LIMIT 1`, 'apiPhotos_' + req.params.id.toString(), req, res, next)
+    .then(rows => {
+      res.send(rows);
+    })
+    .catch(err => console.log('Error ', err));
   })
   .options((req, res) => {
     res.sendStatus(200);
