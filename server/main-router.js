@@ -6,8 +6,8 @@ const router = express.Router();
 
 router.route('/ssr/:id')
   .get((req, res, next) => {
-    let id = ParseInt(req.params.id);
-    if (id > 1) {
+    let id = parseInt(req.params.id);
+    if (id > 0) {
       ssr(req, res, next, 'SSR_' + id, id, Html); 
     } else {
       res.sendStatus(404);

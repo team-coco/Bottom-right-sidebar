@@ -6,7 +6,7 @@ const databaseHost = process.env.DATABASE_HOST || 'localhost';
 const databasePort = process.env.DATABASE_PORT || 3306;
 
 const pool = mysql.createPool({
-  connectionLimit: 140,
+  connectionLimit: 100,
   host: databaseHost,
   port: databasePort,
   user: 'chompy',

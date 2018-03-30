@@ -18,6 +18,7 @@ app.use((req, res, next) => {
 });
 app.use(express.static(path.resolve('public')));
 app.use('/main', mainRouter);
+app.use('/main/sidebar', mainRouter);
 app.use('/api/sidebar', sidebarRouter);
 
 app.get('/', (req, res, next) => res.sendFile('index.html', {root: path.resolve('public')}));
